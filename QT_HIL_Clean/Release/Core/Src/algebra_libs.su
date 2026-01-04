@@ -1,6 +1,0 @@
-../Core/Src/algebra_libs.c:7:9:osqp_algebra_linsys_supported	0	static
-../Core/Src/algebra_libs.c:12:30:osqp_algebra_default_linsys	0	static
-../Core/Src/algebra_libs.c:17:9:osqp_algebra_init_libs	0	static
-../Core/Src/algebra_libs.c:23:6:osqp_algebra_free_libs	0	static
-../Core/Src/algebra_libs.c:25:9:osqp_algebra_name	0	static
-../Core/Src/algebra_libs.c:42:9:osqp_algebra_device_name	0	static
