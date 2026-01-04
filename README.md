@@ -23,6 +23,6 @@ This repository contains the source code and experimental data for benchmarking 
 | Symbolic KAN| 3.4 µs     | 3.4 µs     | <0.1%    |
 
 ## Folder Structure
-- `QT_HIL_Clean/`: C code for STM32 (System Workbench / CubeIDE).
-- `Diploma_Johansson_KAN_MPC_EKF/`: Python Plant model (ODE), Training scripts (PyKAN), and Data Logs.
+- `Firmware/` (QT_HIL_Clean): C code for STM32 (System Workbench / CubeIDE).
+- `Simulation/` (Diploma_Johansson_KAN_MPC_EKF): Python Plant model (ODE), Training scripts (PyKAN), and Data Logs.
 - `Paper/`: PDF of my IEEE ICCA submission.
