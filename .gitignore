@@ -1,0 +1,21 @@
+# STM32CubeIDE / Eclipse Build Artifacts
+Debug/
+Release/
+build/
+bin/
+*.elf
+*.bin
+*.hex
+*.map
+*.o
+*.su
+*.list
+
+# Python Junk
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+
+# System Files
+.DS_Store
+Thumbs.db

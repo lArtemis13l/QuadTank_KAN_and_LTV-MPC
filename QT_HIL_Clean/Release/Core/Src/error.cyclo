@@ -1,0 +1,2 @@
+../Core/Src/error.c:25:9:_osqp_error	1
+../Core/Src/error.c:35:9:_osqp_error_line	1

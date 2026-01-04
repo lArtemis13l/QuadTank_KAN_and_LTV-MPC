@@ -1,0 +1,14 @@
+../Core/Src/csc_math.c:7:6:vec_set_scalar	2
+../Core/Src/csc_math.c:12:6:vec_mult_scalar	2
+../Core/Src/csc_math.c:17:6:vec_negate	2
+../Core/Src/csc_math.c:27:6:csc_update_values	4
+../Core/Src/csc_math.c:50:6:csc_scale	2
+../Core/Src/csc_math.c:60:6:csc_lmult_diag	3
+../Core/Src/csc_math.c:78:6:csc_rmult_diag	3
+../Core/Src/csc_math.c:94:6:csc_AtDA_extract_diag	3
+../Core/Src/csc_math.c:114:6:csc_Axpy_sym_triu	17
+../Core/Src/csc_math.c:169:6:csc_Axpy	14
+../Core/Src/csc_math.c:216:6:csc_Atxpy	14
+../Core/Src/csc_math.c:292:6:csc_col_norm_inf	4
+../Core/Src/csc_math.c:312:6:csc_row_norm_inf	4
+../Core/Src/csc_math.c:335:6:csc_row_norm_inf_sym_triu	5
