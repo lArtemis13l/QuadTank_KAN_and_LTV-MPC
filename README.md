@@ -1,6 +1,7 @@
 # Symbolic KAN vs. MPC on Embedded Hardware (STM32H7)
 
-**Author:** Adilkhan Salkimbayev 
+**Author:** Adilkhan Salkimbayev
+
 **Status:** Submitted to IEEE ICCA 2026
 
 ## Overview
