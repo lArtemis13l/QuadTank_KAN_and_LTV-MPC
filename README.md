@@ -10,7 +10,7 @@ This repository contains the source code and experimental data for benchmarking 
 **Key Result:** KAN achieves a **~6000x speedup** (3µs vs 19ms) while maintaining control stability under disturbance.
 
 ## Hardware Setup
-![Setup](figures/setup_photo.jpg) 
+![Setup](setup_photo.jpg) 
 - **MCU:** STM32H753ZI (Cortex-M7 @ 480MHz)
 - **Method:** Hardware-in-the-Loop (HIL) via UART (921.6 kbps)
 - **Solver:** OSQP (for MPC) vs. Symbolic Inference (for KAN)
@@ -22,6 +22,6 @@ This repository contains the source code and experimental data for benchmarking 
 | Symbolic KAN| 3.4 µs     | 3.4 µs     | <0.1%    |
 
 ## Folder Structure
-- `Firmware/`: C code for STM32 (System Workbench / CubeIDE).
-- `Simulation/`: Python Plant model (ODE), Training scripts (PyKAN), and Data Logs.
-- `Paper/`: LaTeX source and high-res figures.
+- `QT_HIL_Clean/`: C code for STM32 (System Workbench / CubeIDE).
+- `Diploma_Johansson_KAN_MPC_EKF/`: Python Plant model (ODE), Training scripts (PyKAN), and Data Logs.
+- `Paper/`: PDF of my IEEE ICCA submission.
