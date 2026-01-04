@@ -12,7 +12,8 @@ This repository contains the source code and experimental data for benchmarking 
 ## Hardware Setup
 ![Setup](setup_photo.jpg) 
 - **MCU:** STM32H753ZI (Cortex-M7 @ 480MHz)
-- **Method:** Hardware-in-the-Loop (HIL) via UART (921.6 kbps)
+- **Laptop:** Acer Nitro 16 AN16-41 (AMD Ryzen 7 7840HS, RTX 4060, 16GB DDR5 RAM)
+- **Method:** Hardware-in-the-Loop (HIL) via UART (921600 Baud)
 - **Solver:** OSQP (for MPC) vs. Symbolic Inference (for KAN)
 
 ## Results
