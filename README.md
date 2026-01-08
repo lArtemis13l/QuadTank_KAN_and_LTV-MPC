@@ -7,7 +7,7 @@
 ## Overview
 This repository contains the source code and experimental data for benchmarking **Symbolic Kolmogorov-Arnold Networks (KAN)** against **Certainty Equivalence MPC** on a Non-Minimum Phase Quad-Tank system.
 
-**Key Result:** KAN achieves a **~19300x speedup** average case (1µs vs 19.3ms) and **~80294x speedup** worst-case while maintaining control stability under disturbance.
+**Key Result:** KAN achieves a **~19500x speedup** average case (0.99µs vs 19.3ms) and **~80294x speedup** worst-case while maintaining control stability under disturbance.
 
 ## Hardware Setup
 ![Setup](setup_photo.jpg) 
