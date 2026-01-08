@@ -1,0 +1,25 @@
+[33m8061af1[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m Codebase conflict res
+[33mb7ebf90[m Quadratic Cost Function plotted, minor code refactoring; later changes will see more additions
+[33m047bc7b[m update Lyapunov Stability for KAN
+[33m954f274[m Merge branch 'master' of https://github.com/lArtemis13l/QuadTank_KAN_and_LTV-MPC
+[33m4f03e34[m add Empirical Convergence Analysis for Symbolic KAN
+[33ma1fcdaa[m Update README.md
+[33m117239f[m Update README.md
+[33m371d972[m Update README.md
+[33m242a989[m Update README.md
+[33ma7d37af[m Rename Simulation_README.md to README.md
+[33m755e92c[m Create Simulation_README.md
+[33m4643aa0[m Apply Apache 2.0 License headers to all source files
+[33m2c1b538[m Create NOTICE
+[33m2ae0e8f[m Update LICENSE
+[33m99ba544[m Update LICENSE
+[33m05efe81[m Create LICENSE
+[33m6fc5939[m Update README.md
+[33mf253807[m Update README.md
+[33m593bfc5[m Update README.md
+[33mad0903d[m Merge branch 'master' of https://github.com/lArtemis13l/QuadTank_KAN_and_LTV-MPC
+[33me423bcb[m Uploaded the photo of my setup
+[33m73b3390[m Update README.md
+[33md4e6020[m Create README.md
+[33md76008f[m Fix .gitignore and remove build artifacts
+[33m824c966[m Initial commit: Symbolic KAN vs MPC implementation on STM32H7
