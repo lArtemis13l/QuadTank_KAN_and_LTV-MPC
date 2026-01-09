@@ -34,7 +34,7 @@ Before initializing the project, ensure that your STM32H7 connected properly and
 
 Ensure all Python libraries that are used in Jupyter Notebooks are installed on your PC. Use **`"pip install -r requirements.txt"`** to install key dependent libraries.
 
-Additionally, use **Device Manager** to ensure that it is indeed communicating with port **COM5**. If port is different, edit **SERIAL_PORT** in the cells containing this variable of the notebook to match your **Device Manager**.
+Additionally, use **Device Manager** to ensure that it is indeed communicating with port **COM5**. If port is different, edit **SERIAL_PORT** in the first cell of the notebook to match your **Device Manager**.
 
 Given the aforementioned steps were verified, below is the guide to compile the given project.
 
