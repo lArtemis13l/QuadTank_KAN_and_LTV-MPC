@@ -7,7 +7,7 @@
 ## Overview
 This repository contains the source code and experimental data for benchmarking **Symbolic Kolmogorov-Arnold Networks (KAN)** against **LTV-MPC (Linear Time-Varying MPC)** on a Non-Minimum Phase Quad-Tank system.
 
-**Key Result:** KAN achieves a **~19500x speedup** average case (0.99µs vs 19.3ms) and **~80294x speedup** (1.02µs vs 81.9ms) worst-case while maintaining control stability under disturbance.
+**Key Result:** KAN achieves a **~19212x speedup** average case (1.02µs vs 19.981ms) and **~74790x speedup** (1.094µs vs 81.82ms) worst-case while maintaining control stability under disturbance.
 
 ## Hardware Setup
 ![Setup](setup_photo.jpg) 
