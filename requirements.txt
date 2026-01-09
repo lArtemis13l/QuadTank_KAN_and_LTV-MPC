@@ -1,0 +1,14 @@
+numpy
+pandas
+matplotlib
+scienceplots
+pyserial
+torch
+pykan
+cvxpy
+osqp
+jupyterlab
+scikit-learn
+tqdm
+scipy
+control
