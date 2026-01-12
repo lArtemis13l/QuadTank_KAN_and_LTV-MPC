@@ -7,8 +7,8 @@
 While the codebase is raw, the following files represent the core workflow:
 
 *   **`01_ProjectInitialization_HILSim.ipynb`**: The main hardware-in-the-loop interface that communicates with the STM32.
-*   **`02a_KAN_Training_NMP.ipynb`**: The training pipeline that produced the final 1µs Symbolic KAN.
-*   **`02b_KAN_Training_SafetyAudit.ipynb`**: Contains the forensic analysis of the "Positive Feedback" sign inversion (Safety Audit).
+*   **`02a_KAN_Training_NMP.ipynb`**: The training pipeline that produced the final 1µs Symbolic KAN. **Non-minimum phase**.
+*   **`02b_KAN_Training_SafetyAudit.ipynb`**: Contains the forensic analysis of the "Positive Feedback" sign inversion (Safety Audit). **Minimum Phase.**
 *   **`03_CodeGen_MPC.ipynb`**: The script generating the OSQP Quadratic Programming solver. **`Nucleo_MPC_GenFinal`** displays the resulting code. 
 *   **`04_Paper_Plot_Generator.ipynb`**: Generates the vector PDFs used in the paper.
 *   **`Data`**: Data logs and plots present in the paper.
