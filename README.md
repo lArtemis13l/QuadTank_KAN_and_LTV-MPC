@@ -25,7 +25,7 @@ This repository contains the source code and experimental data for benchmarking 
 ## Folder Structure
 - `Firmware/` (QT_HIL_Clean): C code for STM32 (System Workbench / CubeIDE).
 - `Simulation/` (Diploma_Johansson_KAN_MPC_EKF): Python Plant model (ODE), Training scripts (PyKAN), and Data Logs.
-- `Paper/`: PDF of my IEEE ICCA submission. (Draft, Beta v1.0)
+- `Paper/`: PDF of my IEEE ICCA submission. (Draft, Beta v1.0.1)
 
 ## Short guide on quick project launch
 All files are provided **as-is** and guaranteed to work, given correct settings are applied to the hardware.
