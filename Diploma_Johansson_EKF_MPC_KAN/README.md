@@ -6,7 +6,7 @@
 
 While the codebase is raw, the following files represent the core workflow:
 
-*   **`01_ProjectInitialization_HILSim.ipynb`**: The main hardware-in-the-loop interface that communicates with the STM32.
+*   **`01_ProjectInitialization_HILSim.ipynb`**: The main hardware-in-the-loop interface that communicates with the STM32. Contains raw symbolic equations implemented into the main loop.
 *   **`02a_KAN_Training_NMP.ipynb`**: The training pipeline that produced the final 1µs Symbolic KAN. **Non-minimum Phase**.
 *   **`02b_KAN_Training_SafetyAudit.ipynb`**: Contains the forensic analysis of the "Positive Feedback" sign inversion (Safety Audit). **Minimum Phase.**
 *   **`03_CodeGen_MPC.ipynb`**: The script generating the OSQP Quadratic Programming solver. **`Nucleo_MPC_GenFinal`** displays the resulting code. 
@@ -15,6 +15,8 @@ While the codebase is raw, the following files represent the core workflow:
 *   **`model`**: Data installed by PyKAN framework for configured usage.
 *   **`figure`**: Images installed by PyKAN framework.
 *   **`Nucleo_MPC_GenFinal`**: Final OSQP-based solver used for the LTV-MPC in the paper.
+*   **`*.csv`**: All CSV files used to generate vector PDFs.
+*   **`*.pdf`**: Some of the PDFs added retroactively, strengthening the scope of the contribution.
 
 ## Note on Code Style
 These notebooks are effectively "Digital Laboratory Notes." They contain debug prints, experimental branches, and intermediate outputs. They are provided "AS IS" under the Apache 2.0 license to ensure transparency and reproducibility of the 1µs vs 19ms (stutters reaching 81ms) benchmark results.
