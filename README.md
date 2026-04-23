@@ -2,7 +2,7 @@
 
 **Author:** Adilkhan Salkimbayev
 
-**Status:** Submitted to IEEE ICCA 2026
+**Status:** Submitted to Engineering Applications on Artificial Intelligence
 
 ## Overview
 This repository contains the source code and experimental data for benchmarking **Symbolic Kolmogorov-Arnold Networks (KAN)** against **LTV-MPC (Linear Time-Varying MPC)** on a Non-Minimum Phase Quad-Tank system.
@@ -25,7 +25,6 @@ This repository contains the source code and experimental data for benchmarking 
 ## Folder Structure
 - `Firmware/` (QT_HIL_Clean): C code for STM32 (System Workbench / CubeIDE).
 - `Simulation/` (Diploma_Johansson_KAN_MPC_EKF): Python Plant model (ODE), Training scripts (PyKAN), and Data Logs.
-- `Paper/`: PDF of my IEEE ICCA submission. (Draft, Beta v1.2.1)
 
 ## Short guide on quick project launch
 All files are provided **as-is** and guaranteed to work, given correct settings are applied to the hardware.
