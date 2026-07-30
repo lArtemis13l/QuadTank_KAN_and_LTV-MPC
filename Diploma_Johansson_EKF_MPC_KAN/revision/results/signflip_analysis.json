@@ -1,0 +1,185 @@
+{
+  "original_dataset_conditioning": {
+    "n_samples": 500,
+    "n_distinct_references": 1,
+    "corr_e1_e2": 0.9637457935111511,
+    "condition_number": 2.0435726877853328e+17,
+    "singular_values": [
+      2.2589089703604452,
+      0.7309924583797308,
+      0.2235425360316987,
+      0.04539108148122242,
+      8.910436714158632e-16,
+      4.945005887835974e-16,
+      1.9335759408842603e-16,
+      8.554648848540753e-17,
+      0.0
+    ],
+    "numerical_rank_of_9_columns": 5,
+    "null_space_dimension": 4,
+    "revised_dataset": {
+      "n_samples": 20400,
+      "n_distinct_references": 6024,
+      "corr_e1_e2": 0.049513511674546325,
+      "condition_number": 90.8826141901282,
+      "numerical_rank_of_9_columns": 9
+    }
+  },
+  "identifiability": {
+    "alpha_h2": -6.28340398110346,
+    "beta_e2_extracted": -50.5462118426809,
+    "beta_e2_repaired": 50.5462118426809,
+    "identifiable_combination_extracted": 44.262807861577436,
+    "identifiable_combination_repaired": -56.82961582378436,
+    "change_in_identifiable_combination": 101.0924236853618,
+    "nullspace_perturbation_t": 7.0,
+    "max_output_change_under_nullspace_perturbation_V": 12.0,
+    "comment": "A null-space move of magnitude t leaves the policy output bit-identical (up to clipping); the manual sign flip changes an identifiable coefficient combination by ~101 units."
+  },
+  "fidelity_and_stability": {
+    "extracted": {
+      "imitation_mae_V": 4.868228744672551,
+      "imitation_mae_pump1_V": 4.733740268530225,
+      "imitation_mae_pump2_V": 5.002717220814878,
+      "imitation_nmae_pct_of_range": 40.56857287227126,
+      "closed_loop_final_state_cm": [
+        13.463805854428196,
+        42.651638788094665,
+        17.086768364475777,
+        0.0
+      ],
+      "closed_loop_max_level_cm": 42.651638788094665,
+      "closed_loop_diverged": true,
+      "closed_loop_h1_err_cm": 3.4638058544281964,
+      "closed_loop_h2_err_cm": 32.651638788094665
+    },
+    "repaired": {
+      "imitation_mae_V": 3.073013195265112,
+      "imitation_mae_pump1_V": 4.733740268530225,
+      "imitation_mae_pump2_V": 1.412286122,
+      "imitation_nmae_pct_of_range": 25.608443293875933,
+      "closed_loop_final_state_cm": [
+        10.108889961954958,
+        9.839922691364016,
+        1.1445632839035424,
+        1.2787642673185597
+      ],
+      "closed_loop_max_level_cm": 12.681242759431552,
+      "closed_loop_diverged": false,
+      "closed_loop_h1_err_cm": 0.10888996195495793,
+      "closed_loop_h2_err_cm": 0.16007730863598368
+    }
+  },
+  "constrained_refit_on_revised_dataset": {
+    "MP": {
+      "pump1": {
+        "coef_on_e_unconstrained": 1.3427580024571781,
+        "coef_on_e_constrained": 1.3427580024571781,
+        "unconstrained_violates_sign": false,
+        "test_mae_V_unconstrained": 1.3178782639911375,
+        "test_mae_V_constrained": 1.3178782639911375,
+        "fit_penalty_pct": 0.0
+      },
+      "pump2": {
+        "coef_on_e_unconstrained": 1.2919222544933644,
+        "coef_on_e_constrained": 1.2919222544933644,
+        "unconstrained_violates_sign": false,
+        "test_mae_V_unconstrained": 1.2716413080035518,
+        "test_mae_V_constrained": 1.2716413080035518,
+        "fit_penalty_pct": 0.0
+      }
+    },
+    "NMP": {
+      "pump1": {
+        "coef_on_e_unconstrained": 0.9603004962623161,
+        "coef_on_e_constrained": 0.9603004962623161,
+        "unconstrained_violates_sign": false,
+        "test_mae_V_unconstrained": 1.7354965614881361,
+        "test_mae_V_constrained": 1.7354965614881361,
+        "fit_penalty_pct": 0.0
+      },
+      "pump2": {
+        "coef_on_e_unconstrained": 0.5776646099000775,
+        "coef_on_e_constrained": 0.5776646099000775,
+        "unconstrained_violates_sign": false,
+        "test_mae_V_unconstrained": 1.6662900082354057,
+        "test_mae_V_constrained": 1.6662900082354057,
+        "fit_penalty_pct": 0.0
+      }
+    },
+    "ORIGINAL-single-trajectory": {
+      "pump1": {
+        "coef_on_e_unconstrained": 1110604238177.877,
+        "coef_on_e_constrained": 1110604238177.877,
+        "unconstrained_violates_sign": false,
+        "test_mae_V_unconstrained": 0.21029615321162437,
+        "test_mae_V_constrained": 0.21029615321162437,
+        "fit_penalty_pct": 0.0
+      },
+      "pump2": {
+        "coef_on_e_unconstrained": -2103422050052.0789,
+        "coef_on_e_constrained": 2103422050031.697,
+        "unconstrained_violates_sign": true,
+        "test_mae_V_unconstrained": 0.6953734999607863,
+        "test_mae_V_constrained": 0.7187610437014778,
+        "fit_penalty_pct": 3.3633067325703787
+      }
+    },
+    "jitter_seed_sensitivity": {
+      "MP": {
+        "n_seeds": 200,
+        "input_jitter_std": 0.0001,
+        "pump1": {
+          "coef_on_e_median": 1.3427671873924294,
+          "coef_on_e_iqr": 0.00012307493184993135,
+          "coef_on_e_min": 1.342540610327957,
+          "coef_on_e_max": 1.3430930637801242,
+          "wrong_sign_frac": 0.0
+        },
+        "pump2": {
+          "coef_on_e_median": 1.2919289900742945,
+          "coef_on_e_iqr": 0.0001483004589473147,
+          "coef_on_e_min": 1.2915767375025786,
+          "coef_on_e_max": 1.2922594046882623,
+          "wrong_sign_frac": 0.0
+        }
+      },
+      "NMP": {
+        "n_seeds": 200,
+        "input_jitter_std": 0.0001,
+        "pump1": {
+          "coef_on_e_median": 0.960320554876102,
+          "coef_on_e_iqr": 0.0012073836034133256,
+          "coef_on_e_min": 0.9583447347643146,
+          "coef_on_e_max": 0.9625138146564635,
+          "wrong_sign_frac": 0.0
+        },
+        "pump2": {
+          "coef_on_e_median": 0.5776646930845313,
+          "coef_on_e_iqr": 0.0011804289441869065,
+          "coef_on_e_min": 0.5749113122413751,
+          "coef_on_e_max": 0.5801382514225801,
+          "wrong_sign_frac": 0.0
+        }
+      },
+      "ORIGINAL-single-trajectory": {
+        "n_seeds": 200,
+        "input_jitter_std": 0.0001,
+        "pump1": {
+          "coef_on_e_median": -0.8125643841716401,
+          "coef_on_e_iqr": 22.592627985901462,
+          "coef_on_e_min": -38.65529144645641,
+          "coef_on_e_max": 46.81194857938252,
+          "wrong_sign_frac": 0.525
+        },
+        "pump2": {
+          "coef_on_e_median": 18.944164017623386,
+          "coef_on_e_iqr": 24.752027048385465,
+          "coef_on_e_min": -36.332919478292126,
+          "coef_on_e_max": 68.30253248900361,
+          "wrong_sign_frac": 0.18
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,171 @@
+# Copyright 2026 Adilkhan Salkimbayev
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+r"""
+Policy parameterisation shared by every learned surrogate.
+
+The deployed controller is
+
+    u = sat[ u_eq(r)  +  K e  +  w(e) * U_max * f(phi(x, r)) ],
+        \_______/     \___/     \_________________________/
+        feed-forward  LQR core   learned nonlinear correction
+
+with  e = r - x,  phi = [x/X_n, e/X_n],  and the gate
+
+    w(e) = min( ||e||^2 / s^2 , 1 ).
+
+Each term has a job and the split is what makes the controller certifiable:
+
+* u_eq(r) is the exact steady-state input of the plant (qtlib.u_eq_of_ref) --
+  two square roots and four multiply-accumulates.  It removes the steady-state
+  offset that a static approximate policy would otherwise inherit from its
+  imitation error.
+
+* K is the discrete LQR gain of the *same* cost (Q, R) used by the MPC teacher,
+  evaluated at the nominal equilibrium of the regime and then held constant.
+
+* w(e) vanishes quadratically as e -> 0, so both the value and the Jacobian of
+  the learned correction vanish at every reachable set-point, for any f
+  whatsoever.  Consequently the closed-loop linearisation at a set-point is
+  exactly A(r) - B K, independent of what was learned: local exponential
+  stability is a *structural* property of the parameterisation, not something
+  the fit has to be constrained into.  The learned term is free to model the
+  predictive, constraint-aware behaviour that distinguishes MPC from LQR, which
+  is precisely the behaviour that matters away from the set-point.
+
+Setting LQR_CORE = False and GATE = False recovers the plain "learn u directly"
+formulation of the original submission; both are reported in the ablation.
+"""
+
+from __future__ import annotations
+
+import numpy as np
+
+import qtlib as Q
+
+FEEDFORWARD = True
+LQR_CORE = True
+GATE = True
+GATE_SCALE = 0.25          # s in w(e) = min(||e/X_n||^2 / s^2, 1)
+LQR_REF = (10.0, 10.0)     # nominal equilibrium at which K is computed
+DT_LQR = 0.1
+# The core is deliberately DETUNED relative to the teacher's own R = 1e-3.
+# With the teacher's weights the unconstrained LQR gain exceeds 100 V/cm and
+# saturates on any appreciable error; even R = I saturates through the whole
+# transient, which would leave the learned term with nothing to do and make
+# every surrogate behave identically.  R_CORE = 10 I gives a gentle stabilising
+# gain of order 1 V/cm: enough to own the linearisation at the set-point (and
+# hence the stability certificate), small enough that the transient is governed
+# by the learned term.
+R_CORE = np.diag([10.0, 10.0])
+
+REGIMES = {"MP": Q.MP, "NMP": Q.NMP}
+_K_CACHE = {}
+_BOX_CACHE = {}
+
+# A polynomial extrapolates catastrophically outside the region it was fitted
+# on, and the quadruple tank is easy to drive there (a large set-point change
+# from a nearly full tank).  The deployed law is therefore evaluated on
+# features saturated to the box spanned by its training data: outside that box
+# the law is frozen at the boundary rather than extrapolated.  The box contains
+# every reachable equilibrium in its interior, so the structural properties
+# (P1) and (P2) are unaffected.  Bounded-activation networks (tanh MLP,
+# DeepONet) are inherently bounded and need no such guard.
+CLIP_FEATURES = True
+
+# u_eq: 2 sqrt + 4 multiply-add;  K e: 8 multiply-add;  gate: 4 mul + 3 add + 1 div
+CORE_FLOPS = 2 + 4 + 8 + 8
+
+
+def lqr_gain(regime):
+    """Constant discrete LQR gain of the teacher's cost at the nominal point."""
+    if regime not in _K_CACHE:
+        reg = REGIMES[regime]
+        x_eq, _ = Q.equilibrium(LQR_REF[0], LQR_REF[1], reg)
+        K, _ = Q.gs_lqr_gain(reg, x_eq, DT_LQR, R=R_CORE)
+        _K_CACHE[regime] = K
+    return _K_CACHE[regime]
+
+
+def feature_box(regime):
+    """Min/max of every policy feature over the regime's training split."""
+    if regime not in _BOX_CACHE:
+        import os as _os
+        f = _os.path.join(_os.path.dirname(_os.path.abspath(__file__)),
+                          "data", f"dataset_{regime}.npz")
+        d = np.load(f, allow_pickle=True)
+        F = d["feat"][d["split"] == "train"]
+        _BOX_CACHE[regime] = (F.min(0), F.max(0))
+    return _BOX_CACHE[regime]
+
+
+def clip_features(feat, regime):
+    if not CLIP_FEATURES:
+        return np.asarray(feat, float).reshape(-1, 8)
+    lo, hi = feature_box(regime)
+    return np.clip(np.asarray(feat, float).reshape(-1, 8), lo, hi)
+
+
+def gate(feat):
+    """w(e), the factor that makes the learned correction vanish at e = 0."""
+    feat = np.asarray(feat, float).reshape(-1, 8)
+    if not GATE:
+        return np.ones(len(feat))
+    e = feat[:, 4:]
+    return np.minimum(np.sum(e ** 2, axis=1) / GATE_SCALE ** 2, 1.0)
+
+
+def dgate(feat, v):
+    """d w / d phi_v  (zero for level features and in the saturated region)."""
+    feat = np.asarray(feat, float).reshape(-1, 8)
+    if not GATE or v < 4:
+        return np.zeros(len(feat))
+    e = feat[:, 4:]
+    active = (np.sum(e ** 2, axis=1) / GATE_SCALE ** 2) < 1.0
+    return np.where(active, 2.0 * feat[:, v] / GATE_SCALE ** 2, 0.0)
+
+
+def _core(ref, x, regime):
+    """u_eq(r) + K e, in volts."""
+    ref = np.asarray(ref, float).reshape(-1, 4)
+    x = np.asarray(x, float).reshape(-1, 4)
+    reg = REGIMES[regime]
+    u = np.zeros((len(ref), 2))
+    if FEEDFORWARD:
+        u = u + Q.u_eq_of_ref(ref, reg)
+    if LQR_CORE:
+        u = u + (ref - x) @ lqr_gain(regime).T
+    return u
+
+
+def encode_targets(u, x, ref, regime):
+    """
+    Learning target: the part of the MPC command that the core does not already
+    explain, un-gated so that the surrogate learns f itself.
+    """
+    u = np.asarray(u, float).reshape(-1, 2)
+    resid = (u - _core(ref, x, regime)) / Q.NORM_U
+    return resid
+
+
+def gate_of(x, ref):
+    return gate(Q.features(x, ref))
+
+
+def decode(y, x, ref, regime, clip=True):
+    """Map a surrogate output back to a pump command."""
+    y = np.asarray(y, float).reshape(-1, 2)
+    w = gate(Q.features(x, ref)).reshape(-1, 1)
+    u = _core(ref, x, regime) + w * y * Q.NORM_U
+    return np.clip(u, Q.U_MIN, Q.U_MAX) if clip else u

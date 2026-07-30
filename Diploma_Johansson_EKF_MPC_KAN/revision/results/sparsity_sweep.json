@@ -1,0 +1,2330 @@
+{
+  "MP": {
+    "kan_support_curve": [
+      {
+        "k": 4,
+        "nmae": 6.163935149512931,
+        "nmae_unconstrained": 8.568187693507804,
+        "flops": 30,
+        "certificate": {
+          "max_spectral_radius": 0.9983892429197035,
+          "all_locally_stable": true,
+          "worst_offset_cm": 0.0,
+          "all_fixed_points_found": true
+        },
+        "n_terms": [
+          4,
+          4
+        ],
+        "sign_violation": [
+          0.0,
+          0.0
+        ],
+        "sign_violation_unconstrained": [
+          0.01375,
+          0.0275
+        ]
+      },
+      {
+        "k": 6,
+        "nmae": 7.379791483659139,
+        "nmae_unconstrained": 8.52663194559603,
+        "flops": 42,
+        "certificate": {
+          "max_spectral_radius": 0.998389242900396,
+          "all_locally_stable": true,
+          "worst_offset_cm": 0.0,
+          "all_fixed_points_found": true
+        },
+        "n_terms": [
+          6,
+          6
+        ],
+        "sign_violation": [
+          0.0,
+          0.0
+        ],
+        "sign_violation_unconstrained": [
+          0.015625,
+          0.2625
+        ]
+      },
+      {
+        "k": 8,
+        "nmae": 6.995889272765347,
+        "nmae_unconstrained": 7.859816145032639,
+        "flops": 49,
+        "certificate": {
+          "max_spectral_radius": 0.9983892428996487,
+          "all_locally_stable": true,
+          "worst_offset_cm": 0.0,
+          "all_fixed_points_found": true
+        },
+        "n_terms": [
+          8,
+          8
+        ],
+        "sign_violation": [
+          0.0,
+          0.0
+        ],
+        "sign_violation_unconstrained": [
+          0.230625,
+          0.291875
+        ]
+      },
+      {
+        "k": 12,
+        "nmae": 7.2334349270036205,
+        "nmae_unconstrained": 7.36932689433709,
+        "flops": 64,
+        "certificate": {
+          "max_spectral_radius": 0.9983892428951217,
+          "all_locally_stable": true,
+          "worst_offset_cm": 0.0,
+          "all_fixed_points_found": true
+        },
+        "n_terms": [
+          12,
+          12
+        ],
+        "sign_violation": [
+          0.0,
+          0.0
+        ],
+        "sign_violation_unconstrained": [
+          0.2825,
+          0.300625
+        ]
+      },
+      {
+        "k": 16,
+        "nmae": 6.671525550463909,
+        "nmae_unconstrained": 7.007505544350735,
+        "flops": 79,
+        "certificate": {
+          "max_spectral_radius": 0.9983892429216306,
+          "all_locally_stable": true,
+          "worst_offset_cm": 0.0,
+          "all_fixed_points_found": true
+        },
+        "n_terms": [
+          16,
+          16
+        ],
+        "sign_violation": [
+          0.0,
+          0.0
+        ],
+        "sign_violation_unconstrained": [
+          0.285625,
+          0.2975
+        ]
+      },
+      {
+        "k": 24,
+        "nmae": 7.041452993879159,
+        "nmae_unconstrained": 6.825470531592388,
+        "flops": 109,
+        "certificate": {
+          "max_spectral_radius": 0.9983892428721448,
+          "all_locally_stable": true,
+          "worst_offset_cm": 0.0,
+          "all_fixed_points_found": true
+        },
+        "n_terms": [
+          24,
+          24
+        ],
+        "sign_violation": [
+          0.0,
+          0.0
+        ],
+        "sign_violation_unconstrained": [
+          0.2975,
+          0.288125
+        ]
+      },
+      {
+        "k": 32,
+        "nmae": 7.095116499188786,
+        "nmae_unconstrained": 6.6383137296139685,
+        "flops": 141,
+        "certificate": {
+          "max_spectral_radius": 0.9983892428976316,
+          "all_locally_stable": true,
+          "worst_offset_cm": 0.0,
+          "all_fixed_points_found": true
+        },
+        "n_terms": [
+          32,
+          32
+        ],
+        "sign_violation": [
+          0.0,
+          0.0
+        ],
+        "sign_violation_unconstrained": [
+          0.2925,
+          0.3025
+        ]
+      },
+      {
+        "k": 48,
+        "nmae": 6.278132561169639,
+        "nmae_unconstrained": 6.186443363853648,
+        "flops": 205,
+        "certificate": {
+          "max_spectral_radius": 0.9983892428723977,
+          "all_locally_stable": true,
+          "worst_offset_cm": 0.0,
+          "all_fixed_points_found": true
+        },
+        "n_terms": [
+          48,
+          48
+        ],
+        "sign_violation": [
+          0.0,
+          0.0
+        ],
+        "sign_violation_unconstrained": [
+          0.201875,
+          0.188125
+        ]
+      },
+      {
+        "k": 64,
+        "nmae": 6.133580603101865,
+        "nmae_unconstrained": 6.107601338911986,
+        "flops": 268,
+        "certificate": {
+          "max_spectral_radius": 0.9983892429194493,
+          "all_locally_stable": true,
+          "worst_offset_cm": 0.0,
+          "all_fixed_points_found": true
+        },
+        "n_terms": [
+          64,
+          64
+        ],
+        "sign_violation": [
+          0.0,
+          0.0
+        ],
+        "sign_violation_unconstrained": [
+          0.168125,
+          0.18875
+        ]
+      },
+      {
+        "k": 96,
+        "nmae": 5.88288998137012,
+        "nmae_unconstrained": 5.887591446632615,
+        "flops": 392,
+        "certificate": {
+          "max_spectral_radius": 0.9983892428692207,
+          "all_locally_stable": true,
+          "worst_offset_cm": 0.0,
+          "all_fixed_points_found": true
+        },
+        "n_terms": [
+          96,
+          96
+        ],
+        "sign_violation": [
+          0.0,
+          0.0
+        ],
+        "sign_violation_unconstrained": [
+          0.125,
+          0.1425
+        ]
+      },
+      {
+        "k": 144,
+        "nmae": 5.7314237836333914,
+        "nmae_unconstrained": 5.512794494207643,
+        "flops": 580,
+        "certificate": {
+          "max_spectral_radius": 0.9983892428914789,
+          "all_locally_stable": true,
+          "worst_offset_cm": 0.0,
+          "all_fixed_points_found": true
+        },
+        "n_terms": [
+          144,
+          144
+        ],
+        "sign_violation": [
+          0.0,
+          0.0
+        ],
+        "sign_violation_unconstrained": [
+          0.125625,
+          0.130625
+        ]
+      }
+    ],
+    "direct_polynomial_curve": [
+      {
+        "k": 4,
+        "nmae": 6.163935149512931,
+        "nmae_unconstrained": 8.568187693507804,
+        "flops": 30,
+        "certificate": {
+          "max_spectral_radius": 0.9983892429197035,
+          "all_locally_stable": true,
+          "worst_offset_cm": 0.0,
+          "all_fixed_points_found": true
+        },
+        "n_terms": [
+          4,
+          4
+        ],
+        "sign_violation": [
+          0.0,
+          0.0
+        ],
+        "sign_violation_unconstrained": [
+          0.01375,
+          0.0275
+        ]
+      },
+      {
+        "k": 6,
+        "nmae": 7.379791483659139,
+        "nmae_unconstrained": 8.52663194559603,
+        "flops": 42,
+        "certificate": {
+          "max_spectral_radius": 0.998389242900396,
+          "all_locally_stable": true,
+          "worst_offset_cm": 0.0,
+          "all_fixed_points_found": true
+        },
+        "n_terms": [
+          6,
+          6
+        ],
+        "sign_violation": [
+          0.0,
+          0.0
+        ],
+        "sign_violation_unconstrained": [
+          0.015625,
+          0.2625
+        ]
+      },
+      {
+        "k": 8,
+        "nmae": 6.995889272765347,
+        "nmae_unconstrained": 7.859816145032639,
+        "flops": 49,
+        "certificate": {
+          "max_spectral_radius": 0.9983892428996487,
+          "all_locally_stable": true,
+          "worst_offset_cm": 0.0,
+          "all_fixed_points_found": true
+        },
+        "n_terms": [
+          8,
+          8
+        ],
+        "sign_violation": [
+          0.0,
+          0.0
+        ],
+        "sign_violation_unconstrained": [
+          0.230625,
+          0.291875
+        ]
+      },
+      {
+        "k": 12,
+        "nmae": 7.2334349270036205,
+        "nmae_unconstrained": 7.36932689433709,
+        "flops": 64,
+        "certificate": {
+          "max_spectral_radius": 0.9983892428951217,
+          "all_locally_stable": true,
+          "worst_offset_cm": 0.0,
+          "all_fixed_points_found": true
+        },
+        "n_terms": [
+          12,
+          12
+        ],
+        "sign_violation": [
+          0.0,
+          0.0
+        ],
+        "sign_violation_unconstrained": [
+          0.2825,
+          0.300625
+        ]
+      },
+      {
+        "k": 16,
+        "nmae": 6.704487311026921,
+        "nmae_unconstrained": 6.998398469216383,
+        "flops": 79,
+        "certificate": {
+          "max_spectral_radius": 0.998389242892589,
+          "all_locally_stable": true,
+          "worst_offset_cm": 0.0,
+          "all_fixed_points_found": true
+        },
+        "n_terms": [
+          16,
+          16
+        ],
+        "sign_violation": [
+          0.0,
+          0.0
+        ],
+        "sign_violation_unconstrained": [
+          0.285625,
+          0.296875
+        ]
+      },
+      {
+        "k": 24,
+        "nmae": 7.162890284069328,
+        "nmae_unconstrained": 6.79054537521554,
+        "flops": 111,
+        "certificate": {
+          "max_spectral_radius": 0.9983892429199571,
+          "all_locally_stable": true,
+          "worst_offset_cm": 0.0,
+          "all_fixed_points_found": true
+        },
+        "n_terms": [
+          24,
+          24
+        ],
+        "sign_violation": [
+          0.0,
+          0.0
+        ],
+        "sign_violation_unconstrained": [
+          0.28625,
+          0.28625
+        ]
+      },
+      {
+        "k": 32,
+        "nmae": 7.031013569692493,
+        "nmae_unconstrained": 6.658161509612939,
+        "flops": 144,
+        "certificate": {
+          "max_spectral_radius": 0.9983892429222126,
+          "all_locally_stable": true,
+          "worst_offset_cm": 0.0,
+          "all_fixed_points_found": true
+        },
+        "n_terms": [
+          32,
+          32
+        ],
+        "sign_violation": [
+          0.0,
+          0.0
+        ],
+        "sign_violation_unconstrained": [
+          0.291875,
+          0.306875
+        ]
+      },
+      {
+        "k": 48,
+        "nmae": 6.5850832793719505,
+        "nmae_unconstrained": 6.316976938318049,
+        "flops": 209,
+        "certificate": {
+          "max_spectral_radius": 0.998389242893172,
+          "all_locally_stable": true,
+          "worst_offset_cm": 0.0,
+          "all_fixed_points_found": true
+        },
+        "n_terms": [
+          48,
+          48
+        ],
+        "sign_violation": [
+          0.0,
+          0.0
+        ],
+        "sign_violation_unconstrained": [
+          0.288125,
+          0.29625
+        ]
+      },
+      {
+        "k": 64,
+        "nmae": 5.993685205712846,
+        "nmae_unconstrained": 6.095915562865394,
+        "flops": 281,
+        "certificate": {
+          "max_spectral_radius": 0.9983892428906439,
+          "all_locally_stable": true,
+          "worst_offset_cm": 0.0,
+          "all_fixed_points_found": true
+        },
+        "n_terms": [
+          64,
+          64
+        ],
+        "sign_violation": [
+          0.0,
+          0.0
+        ],
+        "sign_violation_unconstrained": [
+          0.293125,
+          0.30625
+        ]
+      },
+      {
+        "k": 96,
+        "nmae": 5.983323159956316,
+        "nmae_unconstrained": 5.773055335897438,
+        "flops": 431,
+        "certificate": {
+          "max_spectral_radius": 0.998389242893172,
+          "all_locally_stable": true,
+          "worst_offset_cm": 0.0,
+          "all_fixed_points_found": true
+        },
+        "n_terms": [
+          96,
+          96
+        ],
+        "sign_violation": [
+          0.0,
+          0.0
+        ],
+        "sign_violation_unconstrained": [
+          0.283125,
+          0.211875
+        ]
+      },
+      {
+        "k": 144,
+        "nmae": 5.833999294110419,
+        "nmae_unconstrained": 5.64354325041138,
+        "flops": 673,
+        "certificate": {
+          "max_spectral_radius": 0.9983892428982857,
+          "all_locally_stable": true,
+          "worst_offset_cm": 0.0,
+          "all_fixed_points_found": true
+        },
+        "n_terms": [
+          144,
+          144
+        ],
+        "sign_violation": [
+          0.008125,
+          0.0125
+        ],
+        "sign_violation_unconstrained": [
+          0.141875,
+          0.2575
+        ]
+      }
+    ],
+    "dictionary_size": 495,
+    "kan_support_size": 145,
+    "deployed": {
+      "k": 4,
+      "nmae": 6.163935149512931,
+      "nmae_unconstrained": 8.568187693507804,
+      "flops": 30,
+      "certificate": {
+        "max_spectral_radius": 0.9983892429197035,
+        "all_locally_stable": true,
+        "worst_offset_cm": 0.0,
+        "all_fixed_points_found": true
+      },
+      "n_terms": [
+        4,
+        4
+      ],
+      "sign_violation": [
+        0.0,
+        0.0
+      ],
+      "sign_violation_unconstrained": [
+        0.01375,
+        0.0275
+      ]
+    },
+    "selection_rule": {
+      "rho_max": 0.9995,
+      "tol_pp": 1.0,
+      "reason": "smallest certified-stable budget within 1.0 pp of the best certified accuracy"
+    },
+    "lqr_gain": [
+      [
+        1.764237381282132,
+        -0.008831549576779849,
+        0.39113806251235245,
+        0.05696245987168462
+      ],
+      [
+        0.07515872511862472,
+        1.7700237774615153,
+        0.10437208836227477,
+        0.37528222943672634
+      ]
+    ],
+    "gate_scale": 0.25,
+    "deployed_terms": {
+      "pump1": [
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "pump2": [
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      ]
+    },
+    "deployed_coefficients": {
+      "pump1": [
+        -0.21033704851815055,
+        0.22209244110098691,
+        -0.6730425428763552,
+        0.6303846878473081
+      ],
+      "pump2": [
+        -0.09373603693618729,
+        -0.9053056576503851,
+        0.670829387286309,
+        0.1806389910964004
+      ]
+    }
+  },
+  "NMP": {
+    "kan_support_curve": [
+      {
+        "k": 4,
+        "nmae": 14.141890981915486,
+        "nmae_unconstrained": 14.141893508886135,
+        "flops": 30,
+        "certificate": {
+          "max_spectral_radius": 0.9987697430279188,
+          "all_locally_stable": true,
+          "worst_offset_cm": 0.0,
+          "all_fixed_points_found": true
+        },
+        "n_terms": [
+          4,
+          4
+        ],
+        "sign_violation": [
+          0.0,
+          0.0
+        ],
+        "sign_violation_unconstrained": [
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "k": 6,
+        "nmae": 14.188781271362854,
+        "nmae_unconstrained": 14.188782780397707,
+        "flops": 36,
+        "certificate": {
+          "max_spectral_radius": 0.9987697429984385,
+          "all_locally_stable": true,
+          "worst_offset_cm": 0.0,
+          "all_fixed_points_found": true
+        },
+        "n_terms": [
+          6,
+          6
+        ],
+        "sign_violation": [
+          0.0,
+          0.0
+        ],
+        "sign_violation_unconstrained": [
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "k": 8,
+        "nmae": 12.775252471449607,
+        "nmae_unconstrained": 12.785576088293316,
+        "flops": 44,
+        "certificate": {
+          "max_spectral_radius": 0.9987697429751579,
+          "all_locally_stable": true,
+          "worst_offset_cm": 0.0,
+          "all_fixed_points_found": true
+        },
+        "n_terms": [
+          8,
+          8
+        ],
+        "sign_violation": [
+          0.0,
+          0.0
+        ],
+        "sign_violation_unconstrained": [
+          0.0,
+          0.019375
+        ]
+      },
+      {
+        "k": 12,
+        "nmae": 11.45840546243947,
+        "nmae_unconstrained": 11.61067560188497,
+        "flops": 63,
+        "certificate": {
+          "max_spectral_radius": 0.9987697430508943,
+          "all_locally_stable": true,
+          "worst_offset_cm": 0.0,
+          "all_fixed_points_found": true
+        },
+        "n_terms": [
+          12,
+          12
+        ],
+        "sign_violation": [
+          0.0,
+          0.0
+        ],
+        "sign_violation_unconstrained": [
+          0.014375,
+          0.02125
+        ]
+      },
+      {
+        "k": 16,
+        "nmae": 11.18322757079377,
+        "nmae_unconstrained": 11.253350640649499,
+        "flops": 79,
+        "certificate": {
+          "max_spectral_radius": 0.998769742954312,
+          "all_locally_stable": true,
+          "worst_offset_cm": 0.0,
+          "all_fixed_points_found": true
+        },
+        "n_terms": [
+          16,
+          16
+        ],
+        "sign_violation": [
+          0.0,
+          0.0
+        ],
+        "sign_violation_unconstrained": [
+          0.0375,
+          0.0
+        ]
+      },
+      {
+        "k": 24,
+        "nmae": 10.438758798320327,
+        "nmae_unconstrained": 10.129860296965099,
+        "flops": 111,
+        "certificate": {
+          "max_spectral_radius": 0.9987697430394621,
+          "all_locally_stable": true,
+          "worst_offset_cm": 0.0,
+          "all_fixed_points_found": true
+        },
+        "n_terms": [
+          24,
+          24
+        ],
+        "sign_violation": [
+          0.0,
+          0.0
+        ],
+        "sign_violation_unconstrained": [
+          0.145,
+          0.22375
+        ]
+      },
+      {
+        "k": 32,
+        "nmae": 9.995312102694571,
+        "nmae_unconstrained": 9.23866464941156,
+        "flops": 143,
+        "certificate": {
+          "max_spectral_radius": 0.9987697430246549,
+          "all_locally_stable": true,
+          "worst_offset_cm": 0.0,
+          "all_fixed_points_found": true
+        },
+        "n_terms": [
+          32,
+          32
+        ],
+        "sign_violation": [
+          0.0,
+          0.0
+        ],
+        "sign_violation_unconstrained": [
+          0.254375,
+          0.159375
+        ]
+      },
+      {
+        "k": 48,
+        "nmae": 8.584935688520671,
+        "nmae_unconstrained": 8.0422849817416,
+        "flops": 203,
+        "certificate": {
+          "max_spectral_radius": 0.9987697429598065,
+          "all_locally_stable": true,
+          "worst_offset_cm": 0.0,
+          "all_fixed_points_found": true
+        },
+        "n_terms": [
+          48,
+          48
+        ],
+        "sign_violation": [
+          0.0,
+          0.0
+        ],
+        "sign_violation_unconstrained": [
+          0.241875,
+          0.198125
+        ]
+      },
+      {
+        "k": 64,
+        "nmae": 8.448838348409474,
+        "nmae_unconstrained": 8.027545620750344,
+        "flops": 266,
+        "certificate": {
+          "max_spectral_radius": 0.9987697429984946,
+          "all_locally_stable": true,
+          "worst_offset_cm": 0.0,
+          "all_fixed_points_found": true
+        },
+        "n_terms": [
+          64,
+          64
+        ],
+        "sign_violation": [
+          0.0,
+          0.0
+        ],
+        "sign_violation_unconstrained": [
+          0.24,
+          0.199375
+        ]
+      },
+      {
+        "k": 96,
+        "nmae": 8.844536716291799,
+        "nmae_unconstrained": 8.978236399449253,
+        "flops": 394,
+        "certificate": {
+          "max_spectral_radius": 0.9987697430919168,
+          "all_locally_stable": true,
+          "worst_offset_cm": 0.0,
+          "all_fixed_points_found": true
+        },
+        "n_terms": [
+          96,
+          96
+        ],
+        "sign_violation": [
+          0.0,
+          0.0
+        ],
+        "sign_violation_unconstrained": [
+          0.30125,
+          0.15375
+        ]
+      },
+      {
+        "k": 144,
+        "nmae": 8.772569317118856,
+        "nmae_unconstrained": 9.11095402240059,
+        "flops": 580,
+        "certificate": {
+          "max_spectral_radius": 0.9987697429822169,
+          "all_locally_stable": true,
+          "worst_offset_cm": 0.0,
+          "all_fixed_points_found": true
+        },
+        "n_terms": [
+          144,
+          144
+        ],
+        "sign_violation": [
+          0.003125,
+          0.00375
+        ],
+        "sign_violation_unconstrained": [
+          0.26,
+          0.225
+        ]
+      }
+    ],
+    "direct_polynomial_curve": [
+      {
+        "k": 4,
+        "nmae": 14.141890981915486,
+        "nmae_unconstrained": 14.141893508886135,
+        "flops": 30,
+        "certificate": {
+          "max_spectral_radius": 0.9987697430279188,
+          "all_locally_stable": true,
+          "worst_offset_cm": 0.0,
+          "all_fixed_points_found": true
+        },
+        "n_terms": [
+          4,
+          4
+        ],
+        "sign_violation": [
+          0.0,
+          0.0
+        ],
+        "sign_violation_unconstrained": [
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "k": 6,
+        "nmae": 14.188781271362854,
+        "nmae_unconstrained": 14.188782780397707,
+        "flops": 36,
+        "certificate": {
+          "max_spectral_radius": 0.9987697429984385,
+          "all_locally_stable": true,
+          "worst_offset_cm": 0.0,
+          "all_fixed_points_found": true
+        },
+        "n_terms": [
+          6,
+          6
+        ],
+        "sign_violation": [
+          0.0,
+          0.0
+        ],
+        "sign_violation_unconstrained": [
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "k": 8,
+        "nmae": 12.775252471449607,
+        "nmae_unconstrained": 12.785576088293316,
+        "flops": 44,
+        "certificate": {
+          "max_spectral_radius": 0.9987697429751579,
+          "all_locally_stable": true,
+          "worst_offset_cm": 0.0,
+          "all_fixed_points_found": true
+        },
+        "n_terms": [
+          8,
+          8
+        ],
+        "sign_violation": [
+          0.0,
+          0.0
+        ],
+        "sign_violation_unconstrained": [
+          0.0,
+          0.019375
+        ]
+      },
+      {
+        "k": 12,
+        "nmae": 11.279123998216178,
+        "nmae_unconstrained": 11.360113121839605,
+        "flops": 65,
+        "certificate": {
+          "max_spectral_radius": 0.9987697429984385,
+          "all_locally_stable": true,
+          "worst_offset_cm": 0.0,
+          "all_fixed_points_found": true
+        },
+        "n_terms": [
+          12,
+          12
+        ],
+        "sign_violation": [
+          0.0,
+          0.0
+        ],
+        "sign_violation_unconstrained": [
+          0.0,
+          0.02125
+        ]
+      },
+      {
+        "k": 16,
+        "nmae": 11.157950214444071,
+        "nmae_unconstrained": 11.205095202941044,
+        "flops": 78,
+        "certificate": {
+          "max_spectral_radius": 0.9987697429984946,
+          "all_locally_stable": true,
+          "worst_offset_cm": 0.0,
+          "all_fixed_points_found": true
+        },
+        "n_terms": [
+          16,
+          16
+        ],
+        "sign_violation": [
+          0.0,
+          0.0
+        ],
+        "sign_violation_unconstrained": [
+          0.0225,
+          0.0
+        ]
+      },
+      {
+        "k": 24,
+        "nmae": 9.647697887389164,
+        "nmae_unconstrained": 9.665469322803283,
+        "flops": 113,
+        "certificate": {
+          "max_spectral_radius": 0.9987697429362976,
+          "all_locally_stable": true,
+          "worst_offset_cm": 0.0,
+          "all_fixed_points_found": true
+        },
+        "n_terms": [
+          24,
+          24
+        ],
+        "sign_violation": [
+          0.0,
+          0.0
+        ],
+        "sign_violation_unconstrained": [
+          0.12125,
+          0.058125
+        ]
+      },
+      {
+        "k": 32,
+        "nmae": 8.698082243375689,
+        "nmae_unconstrained": 8.243259561714105,
+        "flops": 145,
+        "certificate": {
+          "max_spectral_radius": 0.9987697429952322,
+          "all_locally_stable": true,
+          "worst_offset_cm": 0.0,
+          "all_fixed_points_found": true
+        },
+        "n_terms": [
+          32,
+          32
+        ],
+        "sign_violation": [
+          0.0,
+          0.0
+        ],
+        "sign_violation_unconstrained": [
+          0.21,
+          0.1
+        ]
+      },
+      {
+        "k": 48,
+        "nmae": 8.656810970002239,
+        "nmae_unconstrained": 8.345344895174382,
+        "flops": 210,
+        "certificate": {
+          "max_spectral_radius": 0.9987697429984946,
+          "all_locally_stable": true,
+          "worst_offset_cm": 0.0,
+          "all_fixed_points_found": true
+        },
+        "n_terms": [
+          48,
+          48
+        ],
+        "sign_violation": [
+          0.0,
+          0.0
+        ],
+        "sign_violation_unconstrained": [
+          0.2125,
+          0.18625
+        ]
+      },
+      {
+        "k": 64,
+        "nmae": 8.454271783498694,
+        "nmae_unconstrained": 8.044746981627059,
+        "flops": 281,
+        "certificate": {
+          "max_spectral_radius": 0.9987697429543682,
+          "all_locally_stable": true,
+          "worst_offset_cm": 0.0,
+          "all_fixed_points_found": true
+        },
+        "n_terms": [
+          64,
+          64
+        ],
+        "sign_violation": [
+          0.0,
+          0.0
+        ],
+        "sign_violation_unconstrained": [
+          0.235,
+          0.150625
+        ]
+      },
+      {
+        "k": 96,
+        "nmae": 7.993996059159474,
+        "nmae_unconstrained": 8.196692203698447,
+        "flops": 424,
+        "certificate": {
+          "max_spectral_radius": 0.9987697431022386,
+          "all_locally_stable": true,
+          "worst_offset_cm": 0.0,
+          "all_fixed_points_found": true
+        },
+        "n_terms": [
+          96,
+          96
+        ],
+        "sign_violation": [
+          0.0,
+          0.0
+        ],
+        "sign_violation_unconstrained": [
+          0.22875,
+          0.2225
+        ]
+      },
+      {
+        "k": 144,
+        "nmae": 8.54180546992305,
+        "nmae_unconstrained": 8.402501112164398,
+        "flops": 665,
+        "certificate": {
+          "max_spectral_radius": 0.9987697429783956,
+          "all_locally_stable": true,
+          "worst_offset_cm": 0.0,
+          "all_fixed_points_found": true
+        },
+        "n_terms": [
+          144,
+          144
+        ],
+        "sign_violation": [
+          0.0,
+          0.0
+        ],
+        "sign_violation_unconstrained": [
+          0.278125,
+          0.21875
+        ]
+      }
+    ],
+    "dictionary_size": 495,
+    "kan_support_size": 145,
+    "deployed": {
+      "k": 48,
+      "nmae": 8.584935688520671,
+      "nmae_unconstrained": 8.0422849817416,
+      "flops": 203,
+      "certificate": {
+        "max_spectral_radius": 0.9987697429598065,
+        "all_locally_stable": true,
+        "worst_offset_cm": 0.0,
+        "all_fixed_points_found": true
+      },
+      "n_terms": [
+        48,
+        48
+      ],
+      "sign_violation": [
+        0.0,
+        0.0
+      ],
+      "sign_violation_unconstrained": [
+        0.241875,
+        0.198125
+      ]
+    },
+    "selection_rule": {
+      "rho_max": 0.9995,
+      "tol_pp": 1.0,
+      "reason": "smallest certified-stable budget within 1.0 pp of the best certified accuracy"
+    },
+    "lqr_gain": [
+      [
+        1.00849589283065,
+        0.8753112970397914,
+        -0.19287188069814937,
+        0.8206515475910333
+      ],
+      [
+        0.7763498884327489,
+        0.6725396020583349,
+        0.7772007833647264,
+        -0.3925376245102435
+      ]
+    ],
+    "gate_scale": 0.25,
+    "deployed_terms": {
+      "pump1": [
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          2
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          3
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          3,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          2,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          3,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          4,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          2
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          1,
+          2,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          2,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          3,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          0,
+          2,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          2,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          2,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          2,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          4,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        [
+          2,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          4,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "pump2": [
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          2
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          3
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          3,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          2
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          2,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          2,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          3,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          1,
+          2,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          3,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          4,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          0,
+          2,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          2,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          2,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          4,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        [
+          2,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          4,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      ]
+    },
+    "deployed_coefficients": {
+      "pump1": [
+        0.4139733904192066,
+        -0.4600929340835174,
+        1.1510176722175118,
+        -0.44488871899277316,
+        -1.0906438607136542,
+        1.3485537886009957,
+        0.7575291804596764,
+        -0.7764764063227345,
+        -2.3095645480182485,
+        0.1438837315967461,
+        0.7965703499338963,
+        -1.5741061912640453,
+        2.8413511415036488,
+        -2.446947189682925,
+        3.3968104606832297,
+        0.984094926143855,
+        0.09230185843657146,
+        -1.0030702083002476,
+        0.5957715662267535,
+        -5.167358012531183,
+        0.0632110066207455,
+        -0.6460489070095325,
+        -0.15423697720663593,
+        -0.9212760298729165,
+        1.154944961591568,
+        0.8237316162003119,
+        -0.9459989246042937,
+        -1.8389267394898403,
+        -1.739751514652906,
+        2.3833911327396975,
+        1.01045834085629,
+        0.32503493258562427,
+        0.6483689973430407,
+        -3.273639017831623,
+        0.2656976372813714,
+        3.2188925864114273,
+        -0.3808527601407832,
+        3.111127569653306,
+        0.12678632690976843,
+        0.3540067112331583,
+        -0.45438884553005227,
+        1.9204748749402434,
+        -0.01484991348444399,
+        1.521963980827731,
+        -2.104992920466001,
+        0.40672881742758665,
+        -2.61685269398442,
+        0.6384743654221132
+      ],
+      "pump2": [
+        0.3447208819169115,
+        -0.708576187510938,
+        0.4639741022343051,
+        1.6598580615215293,
+        -1.0793041096215414,
+        0.6476222697984919,
+        -0.4531670283256803,
+        0.9248851511225297,
+        -1.168385999270334,
+        1.2701828497993248,
+        -2.138968393367668,
+        0.07204629317677097,
+        -1.1422505523222468,
+        -0.31840352925566934,
+        -0.2267387306418171,
+        -0.16615607292572548,
+        -0.5349502682408982,
+        -2.3156771396422346,
+        1.9646105256803368,
+        -4.9758857606605815,
+        2.947470756074778,
+        -0.29328679025115123,
+        -1.0671392303006604,
+        0.376276903297959,
+        -0.12828871790580829,
+        1.1715601639203366,
+        1.2250725031857426,
+        1.079871275346413,
+        -0.7173141130817563,
+        -1.4527651754164073,
+        3.6819841312824084,
+        -0.3317180154100966,
+        0.6460846330633436,
+        6.7734160758778295,
+        -0.2483631916116182,
+        0.6760127953735985,
+        0.7216606582504488,
+        -1.761931347380432,
+        -0.3653151018408286,
+        -1.7010473979384195,
+        0.0909149453302779,
+        -3.2379861770425347,
+        1.8327229299281542,
+        -0.9578965095564212,
+        3.3847123509592443,
+        3.3130933845727464,
+        -0.829175340886008,
+        -0.28095586050618726
+      ]
+    }
+  }
+}

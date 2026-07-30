@@ -19,3 +19,25 @@ __pycache__/
 # System Files
 .DS_Store
 Thumbs.db
+
+# ---------------------------------------------------------------------------
+# Revision pipeline (Diploma_Johansson_EKF_MPC_KAN/revision)
+# ---------------------------------------------------------------------------
+# Source, result JSONs, datasets and trained models ARE tracked: they back every
+# number in the paper.  What follows is regenerable by re-running the numbered
+# stage scripts, and is excluded to keep the clone small.
+
+# Closed-loop trajectories rebuilt by s05_scenarios.py (~13 MB, 65 files)
+Diploma_Johansson_EKF_MPC_KAN/revision/results/traj/
+
+# Figures rebuilt by s06_make_figures.py (also written into the paper tree)
+Diploma_Johansson_EKF_MPC_KAN/revision/figures/
+
+# Stage logs
+Diploma_Johansson_EKF_MPC_KAN/revision/*.log
+
+# pykan writes training checkpoints to ./model relative to the working
+# directory.  NOTE the near-collision: "model/" is pykan scratch and is
+# ignored; "models/" holds the trained surrogates and IS tracked.
+Diploma_Johansson_EKF_MPC_KAN/model/
+Diploma_Johansson_EKF_MPC_KAN/revision/model/
