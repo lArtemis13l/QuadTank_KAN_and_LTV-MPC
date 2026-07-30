@@ -57,6 +57,7 @@ Either alone prevents the closed loop from converging.
 | `QuadTank_Project/revision/` | **Current.** The pipeline behind the manuscript — see its [README](QuadTank_Project/revision/README.md). |
 | `QuadTank_Project/quad_tank_golden_reference_P_minus.csv` | **Current dependency.** The original single-trajectory dataset whose rank deficiency the sign-flip analysis diagnoses; `s03` reads it. |
 | `QuadTank_Project/*.ipynb`, `Data/`, `Nucleo_MPC_GenFinal/`, other `*.csv` and `*.pdf` | **Superseded.** Retained for provenance only. |
+| `legacy_photos/` | **Legacy.** Photographs of the hardware-in-the-loop bench and IDE from the earlier version. Kept as a record that the work was carried out; no result in the current paper depends on it. |
 
 ### On the superseded material
 
