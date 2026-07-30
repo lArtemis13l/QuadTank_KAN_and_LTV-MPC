@@ -1,52 +1,103 @@
-# Symbolic KAN vs. MPC on Embedded Hardware (STM32H7)
+# Certifiable approximation of model predictive control laws
 
-**Author:** Adilkhan Salkimbayev
+**Author:** Adilkhan Salkimbayev — **Licence:** Apache-2.0
 
-**Status:** Submitted to Engineering Applications on Artificial Intelligence
+Code and data for a study of what can and cannot be certified about an offline
+approximation of a linear time-varying MPC law, on the Johansson quadruple-tank
+benchmark in both its minimum-phase (MP) and non-minimum-phase (NMP) configurations.
 
-## Overview
-This repository contains the source code and experimental data for benchmarking **Symbolic Kolmogorov-Arnold Networks (KAN)** against **LTV-MPC (Linear Time-Varying MPC)** on a Non-Minimum Phase Quad-Tank system.
+Everything reported in the accompanying manuscript is produced by the numbered stage
+scripts in [`QuadTank_Project/revision/`](QuadTank_Project/revision). Start there.
 
-**Key Result:** KAN achieves a **~19212x speedup** average case (1.02µs vs 19.981ms) and **~74790x speedup** (1.094µs vs 81.82ms) worst-case while maintaining control stability under disturbance.
+---
 
-## Hardware Setup
-![Setup](setup_photo.jpg) 
-- **MCU:** STM32H753ZI (Cortex-M7 @ 480MHz)
-- **Laptop:** Acer Nitro 16 AN16-41 (AMD Ryzen 7 7840HS, RTX 4060, 16GB DDR5 RAM)
-- **Method:** Hardware-in-the-Loop (HIL) via UART (921600 Baud)
-- **Solver:** OSQP (for MPC) vs. Symbolic Inference (for KAN)
+## What the study finds
 
-## Results
-| Controller | Avg Latency | Worst-Case | CPU Load |
-|:----------:|:-----------:|:----------:|:--------:|
-| MPC (OSQP) | 19.981 ms       | 81.82 ms      | ~100%    |
-| Symbolic KAN| 1.04 µs     | 1.094 µs     | 0.033%    |
+The deployed controller is
 
-## Folder Structure
-- `Firmware/` (QT_HIL_Clean): C code for STM32 (System Workbench / CubeIDE).
-- `Simulation/` (Diploma_Johansson_KAN_MPC_EKF): Python Plant model (ODE), Training scripts (PyKAN), and Data Logs.
+```
+u = sat[ u_eq(r)  +  K e  +  w(e) * U_max * f(phi(x, r)) ]
+     feed-forward   LQR core   learned correction
+```
 
-## Short guide on quick project launch
-All files are provided **as-is** and guaranteed to work, given correct settings are applied to the hardware.
+with a gate `w(e) = min(||e||^2 / s^2, 1)` that vanishes quadratically at the set-point.
 
-Before initializing the project, ensure that your STM32H7 had connected properly and is displayed as **NOD-H753ZI** as provided in the following screenshot. ![screenshot](ScreenshotNOD.png) 
+| Finding | Evidence |
+|---|---|
+| The **symbolic read-out**, not the network, is a dominant error source | MP: a 2.43 % imitation error becomes 7.85 % under off-the-shelf `auto_symbolic`; a convex refit recovers it to 5.51 %. NMP: 4.45 % → 10.97 % → 9.11 % |
+| An unconstrained read-out **violates negative feedback** on up to 30 % of the operating box | Driven to 0 % (MP) / 0.4 % (NMP) by an affine inequality inside a convex least-squares fit, for ≤ 0.2 pp of accuracy — and in NMP the constraint *improves* accuracy |
+| The gate makes **zero steady-state offset and local stability structural** | Substituting random coefficients (σ up to 100) leaves the closed-loop spectral radius unchanged to ~1e-10 |
+| KAN support selection is **not measurably better** than direct sparse regression | Across 11 term budgets × 2 regimes the two curves sit within a few tenths of a percentage point of each other; neither dominates |
+| The benchmark **cannot justify distillation** | With a correct horizon the MPC beats a well-tuned gain-scheduled LQR by only 7–9 %, so there is little for any approximator to lose |
 
-Ensure all Python libraries that are used in Jupyter Notebooks are installed on your PC. Use **`"pip install -r requirements.txt"`** to install key dependent libraries.
+Deployed law: **4 terms/pump (MP, 30 multiply–accumulates)** and **48 terms/pump
+(NMP, 203)**, certified locally exponentially stable (ρ ≤ 0.9988) at every set-point
+tested, 97–100 % stable under ±20 % parameter perturbation.
 
-Additionally, use **Device Manager** to ensure that it is indeed communicating with port **COM5**. If port is different, edit **SERIAL_PORT** in the first cell of the notebook to match your **Device Manager**.
+### Two defects in the earlier version of this work, reported rather than quietly fixed
 
-Given the aforementioned steps were verified, below is the guide to compile the given project.
+* **The commanded target was not an equilibrium.** With two pumps the equilibrium set is
+  two-dimensional: fixing `(h1, h2)` determines `h3, h4`. In the NMP regime the
+  equilibrium at (10, 10) is `[10, 10, 4.16, 3.44]` cm, so `[10, 10, 2, 2]` is
+  unreachable and *no* controller — the MPC included — could drive its cost to zero.
+* **The prediction horizon was ~20x shorter than the inverse response.** The
+  right-half-plane zero has a 69 s time constant; the original MPC used N = 30 at
+  Δt_p = 0.1 s — a **3-second** horizon. A myopic controller on a non-minimum-phase
+  plant moves in the wrong direction. The revision uses Δt_p = 4 s, with the control
+  loop still at 0.1 s.
 
-## How to launch the project
-1. Open **`Diploma_Johansson_EKF_MPC_KAN/01_ProjectInitiatization_HILSim.ipynb`** and initialize cells 1 (Constant variables) and 2 (Nonlinear model calculation).
-2. Scroll down and find any cell that has **"import serial"**, variables **"packer"** and **"unpacker"** defined, has **"dt_hil"** constant defined in it and a **"for k in range(steps)"** loop defined in **try-catch** block.
-3. Ensure your Nucleo motherboard is connected to your PC.
-4. Open file **`QT_HIL_Clean/Core/config.h`** and verify the setup (Minimum Phase or Non-Minimum Phase). 
-5. Open file **`QT_HIL_Clean/Core/main.c`** and debug it. Ensure the compiler is set to **"-Ofast"`** as given in the screenshot. ![Screenshot](ScreenshotIDE.png)
-6. Comment out either **KAN Controller** or **MPC Controller** depending on what controller you want to test.
-7. Return to Jupyter Notebook and launch the cell you have chosen.
-8. Return to STM32CubeIDE (with **Alt+Tab** shortcut on Windows) and press F8 to resume the debugging process.
-9. Return back to the Jupyter Notebook and wait for the simulation to finish. Matplotlib instance would generate the plot upon completion.
+Either alone prevents the closed loop from converging.
 
-Contact the repository author (**@lArtemis13l**) on socials or open a GitHub issue for questions and issues regarding the code implementation.
+---
 
+## Repository layout
+
+| Path | Status |
+|---|---|
+| `QuadTank_Project/revision/` | **Current.** The pipeline behind the manuscript — see its [README](QuadTank_Project/revision/README.md). |
+| `QuadTank_Project/quad_tank_golden_reference_P_minus.csv` | **Current dependency.** The original single-trajectory dataset whose rank deficiency the sign-flip analysis diagnoses; `s03` reads it. |
+| `QuadTank_Project/*.ipynb`, `Data/`, `Nucleo_MPC_GenFinal/`, other `*.csv` and `*.pdf` | **Superseded.** Retained for provenance only. |
+
+### On the superseded material
+
+The notebooks, the generated OSQP C solver and the hardware-in-the-loop logs belong to
+an earlier version of this work. They are kept because the manuscript diagnoses that
+version's defects and a reader may want to reproduce the diagnosis — not because they
+produce any current result. Nothing under `revision/` imports them, with the single
+exception noted in the table above.
+
+The STM32 firmware (`QT_HIL_Clean/`) has been deleted outright: with the hardware
+campaign gone from the paper, nothing referenced it. It remains recoverable from the
+git history if ever needed (`git log --all -- QT_HIL_Clean`).
+
+The hardware campaign has been removed from the paper. Its latency and flash figures
+were measured for a different symbolic law than the one now deployed, and the
+microcontroller was not available for re-measurement, so retaining them would have
+mixed measured numbers with carried-over ones. Computational cost is now reported as an
+exact multiply–accumulate count, which is a property of the control law rather than of
+a processor. **Any speed-up figure appearing in the git history of this file is
+withdrawn.**
+
+---
+
+## Reproducing
+
+```bash
+cd QuadTank_Project/revision
+pip install -r ../../requirements.txt
+python s01_generate_dataset.py     # ~7 min   datasets, both regimes
+python s02_train_models.py         # ~20 min  KAN, MLP, DeepONet, polynomial baselines
+python s02b_sparsify.py            # ~10 min  term-budget sweep, certified selection
+python s03_signflip_analysis.py    # ~2 min   root cause of the sign anomaly
+python s04_stability.py            # ~12 min  certificate, ROA, Monte-Carlo, constraints
+python s04b_invariance.py          # ~1 min   structural properties (P1), (P2)
+python s05_scenarios.py            # ~12 min  closed-loop scenario campaign
+python s06_make_figures.py         # ~1 min   figures
+python s07_make_tables.py          # <1 min   LaTeX tables
+python s08_key_numbers.py          # <1 min   every number quoted in the prose
+```
+
+Results land in `revision/results/`; `key_numbers.json` collects every quantity the
+manuscript states in text.
+
+Questions and issues: open a GitHub issue, or contact **@lArtemis13l**.

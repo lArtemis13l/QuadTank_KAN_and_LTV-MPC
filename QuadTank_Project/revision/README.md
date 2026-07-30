@@ -1,0 +1,128 @@
+# Reproducible pipeline for the manuscript
+
+Every number, figure and table in the paper is produced by the numbered stage scripts
+in this directory. Run them in order from here; each writes into `data/`, `models/`,
+`results/` and, where relevant, straight into the LaTeX tree
+(`../../../els-cas-templates/figs` and `.../tables`).
+
+```bash
+python s01_generate_dataset.py     # ~7 min   distillation datasets, both regimes
+python s02_train_models.py         # ~20 min  KAN, MLP, DeepONet, polynomial baselines
+python s02b_sparsify.py            # ~10 min  term-budget sweep + certified selection
+python s03_signflip_analysis.py    # ~2 min   root cause of the sign anomaly
+python s04_stability.py            # ~12 min  certificate, ROA, Monte-Carlo, constraints
+python s04b_invariance.py          # ~1 min   structural properties (P1), (P2)
+python s05_scenarios.py            # ~12 min  closed-loop scenario campaign
+python s06_make_figures.py         # ~1 min   all figures
+python s07_make_tables.py          # <1 min   all LaTeX tables
+python s08_key_numbers.py          # <1 min   every number quoted in the prose
+```
+
+`results/key_numbers.json` is the one file to look at if you want to check the
+manuscript's claims against the code: it collects each quantity the text states.
+
+## Modules
+
+| File | Contents |
+|---|---|
+| `qtlib.py` | Plant, EKF, LTV-MPC teacher, equilibrium map, transmission zeros, LQR, metrics, closed-loop driver |
+| `policyform.py` | The deployed skeleton `u = sat[u_eq(r) + K e + w(e)·U_max·f(φ)]` and its structural properties |
+| `symbolic.py` | Monomial support extraction, design matrices, the shape-constrained convex read-out, operation counting |
+| `verify.py` | Closed-loop Jacobian, fixed points, local stability certificate |
+| `controllers.py` | Uniform `u = π(x, ref)` interface for every controller compared |
+
+## The controller
+
+```
+u = sat[ u_eq(r)  +  K e  +  w(e) · U_max · f(φ(x, r)) ],   w(e) = min(‖e‖²/s², 1)
+```
+
+* `u_eq(r)` — the exact steady-state input, two square roots and four multiply–adds
+* `K` — a deliberately detuned LQR gain (`R_CORE = 10·I`), of order 1 V/cm
+* `w(e)` — a gate vanishing quadratically at the set-point
+
+Because `w` **and its gradient** vanish at every reachable set-point, two properties
+hold *for any learned `f` whatsoever*:
+
+* **(P1)** the commanded input at the set-point is exactly `u_eq(r)`, so the set-point
+  is an exact closed-loop fixed point — zero steady-state offset;
+* **(P2)** the closed-loop linearisation there is exactly `A(r) − BK`, so local
+  exponential stability follows from LQR theory, not from the quality of the fit.
+
+`s04b_invariance.py` checks this by substituting random coefficients (σ up to 100) for
+the trained read-out: the spectral radius moves by less than 1e-10.
+
+## Design decisions worth knowing
+
+* **The prediction horizon must span the inverse response.** The right-half-plane zero
+  has a 69 s time constant. The original study used N = 30 at Δt_p = 0.1 s — a 3-second
+  horizon — which makes the teacher myopic, and a myopic controller on a
+  non-minimum-phase plant moves the wrong way. `qtlib.DT_PRED = 4.0` gives a 120 s
+  horizon while the control loop still runs at 0.1 s. A teacher that does not converge
+  cannot be distilled into a student that does.
+
+* **References are always reachable equilibria.** With two pumps the equilibrium set is
+  two-dimensional, so commanding `(h1, h2)` determines `h3, h4` through
+  `qtlib.equilibrium`. The original target `[10, 10, 2, 2]` is not an equilibrium in the
+  NMP regime — which is why the earlier cost converged to a nonzero value and why two of
+  its scenario figures were indistinguishable.
+
+* **Plant parameters** follow Johansson (2000) Table 1. The original notebooks used
+  `k = [2.826, 2.961]`, which matched neither that table nor the earlier paper's own
+  parameter table; the revision uses the published values so code and manuscript agree.
+
+* **Splits are by trajectory and block, never by row**, so no test sample is temporally
+  adjacent to a training sample.
+
+* **The KAN contributes only the monomial support.** Coefficients are always
+  re-estimated by the convex program in `symbolic.fit_shape_constrained`, which imposes
+  `∂u_j/∂e_j ≥ 0` as affine inequalities — this replaces the manual sign correction of
+  the earlier work with a procedure that has a unique solution and no expert input.
+
+* **The deployed term budget is chosen by the stability certificate**, not by accuracy
+  alone: `s02b` takes the smallest budget certified locally exponentially stable at all
+  six test set-points whose error is within 1 pp of the best certified candidate.
+
+* **Features are clipped to the training box** before the polynomial is evaluated. A
+  degree-4 polynomial extrapolates catastrophically outside the region it was fitted on;
+  without this guard the law overflowed a tank in 6 % of randomised tasks, with it in
+  none. Every reachable equilibrium is interior to the box, so (P1) and (P2) are
+  unaffected.
+
+* **`s02b` is idempotent**: it re-derives the KAN support from the stored symbolic
+  formulas rather than from its own previous output.
+
+## What the results say
+
+| | MP | NMP |
+|---|---|---|
+| spline KAN → MPC policy | 2.43 % | 4.45 % |
+| after `auto_symbolic` | 7.85 % | 10.97 % |
+| after convex refit | 5.51 % | 9.11 % |
+| deployed law | 6.16 % (4 terms, 30 MACs) | 8.58 % (48 terms, 203 MACs) |
+| spectral radius / ROA / Monte-Carlo stable | 0.9984 / 100 % / 97 % | 0.9988 / 89 % / 100 % |
+| negative-feedback violation, unconstrained → constrained | 30.2 % → 0 % | 30.1 % → 0.4 % |
+
+nMAE is relative to the full actuator range (12 V), predictions clipped to the actuator
+box before scoring.
+
+Two results are negative and are reported as such in the paper: the KAN-selected support
+is statistically indistinguishable from one chosen directly by sparse regression at
+every term budget, and on this benchmark the MPC beats a well-tuned gain-scheduled LQR
+by only 7–9 %, so the plant cannot demonstrate the value of approximating an optimiser.
+
+## Scope
+
+Everything here is software-in-the-loop. The hardware campaign of the earlier work has
+been dropped from the paper: its latency and flash figures were measured for a different
+symbolic law and the microcontroller was not available for re-measurement, so keeping
+them would have mixed measured with carried-over numbers. Computational cost is reported
+as an exact operation count (`symbolic.flops` plus `policyform.CORE_FLOPS`), a property
+of the control law rather than of a processor.
+
+## External dependency
+
+`s03_signflip_analysis.py` reads `../quad_tank_golden_reference_P_minus.csv`, the
+original single-trajectory distillation set. That file is the subject of the analysis —
+its regressor has rank 5 of 9 — so it must stay where it is. Nothing else in this
+directory reads anything outside it.

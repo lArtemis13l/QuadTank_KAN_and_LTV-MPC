@@ -1,14 +1,18 @@
+# Revision pipeline (QuadTank_Project/revision) -- required
 numpy
+scipy
+sympy
 pandas
-matplotlib
-scienceplots
-pyserial
+scikit-learn
 torch
 pykan
 cvxpy
 osqp
-jupyterlab
-scikit-learn
-tqdm
-scipy
 control
+matplotlib
+scienceplots
+
+# Superseded notebooks only (QuadTank_Project/*.ipynb)
+jupyterlab
+pyserial
+tqdm
