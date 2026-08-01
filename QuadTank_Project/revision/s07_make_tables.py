@@ -78,16 +78,17 @@ def t_dataset():
             f"{s['effective_rank']}/9 \\\\")
     orig_row = ""
     if orig:
-        orig_row = (f"Original (single traj.) & {orig['n_samples']} & "
+        orig_row = (f"Single trajectory, fixed $r$ & {orig['n_samples']} & "
                     f"{int(0.8*orig['n_samples'])} & -- & {int(0.2*orig['n_samples'])} & "
                     f"{orig['n_samples']} & 0 & 1 & {rd(orig['corr_e1_e2'],3)} & "
                     f"$2.0\\times10^{{17}}$ & "
                     f"{orig['numerical_rank_of_9_columns']}/9 \\\\")
-    write("tab_dataset.tex", r"""\begin{table*}[pos=t]
+    write("tab_dataset.tex", r"""\begin{table*}[pos=tp]
 \caption{Design of the policy-distillation datasets. The regressor is the 8-dimensional
 policy input augmented with a bias column; its numerical rank determines whether the
-individual coefficients of a linear symbolic read-out are identifiable at all. The
-single-trajectory design of the original submission is shown for comparison.}
+individual coefficients of a linear symbolic read-out are identifiable at all. A
+single regulation trajectory towards a fixed reference is shown for contrast: it is
+the cheapest design to collect and the one on which the read-out is not identifiable.}
 \centering
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{lrrrrrrrrrr}
@@ -143,7 +144,7 @@ def t_openloop():
         rows.append(f"\\textbf{{Deployed symbolic law ({d_mp['k']} terms)}} & "
                     f"{sum(d_mp['n_terms'])} & \\textbf{{{rd(d_mp['nmae'])}}} & -- & "
                     f"\\textbf{{{rd(d_nm['nmae'])}}} & -- \\\\")
-    write("tab_openloop.tex", r"""\begin{table*}[pos=t]
+    write("tab_openloop.tex", r"""\begin{table*}[pos=tp]
 \caption{Open-loop imitation of the LTV-MPC policy on the held-out test split.
 nMAE is the mean absolute command error as a percentage of the full actuator
 range ($U_{\max}-U_{\min}=12$~V); predictions are clipped to the actuator box
@@ -184,7 +185,7 @@ def t_closedloop():
             f"{rd(a['total_variation_u_V'],1)} & "
             f"{rd(b['rmse_h12_cm'])} & {rd(abs(b['max_abs_ss_err_cm']))} & "
             f"{rd(b['total_variation_u_V'],1)} \\\\")
-    write("tab_closedloop.tex", r"""\begin{table*}[pos=t]
+    write("tab_closedloop.tex", r"""\begin{table*}[pos=tp]
 \caption{Closed-loop tracking of the reachable equilibrium of $(h_1,h_2)=(10,10)$~cm
 from the Johansson initial state, with the EKF and measurement noise in the loop
 (120~s, $\Delta t = 0.1$~s). RMSE and steady-state error are over the controlled
@@ -225,7 +226,7 @@ def t_scenarios():
             f"{rd(di['peak_deviation_h1_cm'])} & {rd(di['recovery_time_s'],1)} & "
             f"{rd(di['total_variation_u_V'],1)} & "
             f"{rd(abs(dg['final_err_h1_cm']))} & {rd(dg['stable'])} \\\\")
-    write("tab_scenarios.tex", r"""\begin{table*}[pos=t]
+    write("tab_scenarios.tex", r"""\begin{table*}[pos=tp]
 \caption{Scenario campaign, NMP regime. S2: four successive, partly asymmetric
 set-point changes. S3: $+3$~cm load disturbance on tank~1 at $t=60$~s; recovery
 time is the first instant at which $|h_1-h_1^{\rm ref}|<0.1$~cm. S4: pump gains
@@ -269,7 +270,7 @@ def t_stability():
             f"{rd(100*mc['stable_fraction'],1)} & "
             f"{rd(mc['h1_err_cm']['p95_abs'])} & "
             f"{rd(100*mc['overflow_fraction'],1)} \\\\")
-    write("tab_stability.tex", r"""\begin{table}[pos=t]
+    write("tab_stability.tex", r"""\begin{table}[pos=htbp]
 \caption{What is actually verified about the deployed law. $\rho$ is the spectral
 radius of the closed-loop Jacobian at the fixed point, evaluated at six
 reachable set-points; $\rho<1$ certifies local exponential stability
@@ -311,7 +312,7 @@ def t_constraints():
             f"{rd(a['max_level_observed_cm'])} & "
             f"{rd(100*b['overflow_fraction'],1)} & {rd(100*b['dryout_fraction'],1)} & "
             f"{rd(b['max_level_observed_cm'])} \\\\")
-    write("tab_constraints.tex", r"""\begin{table*}[pos=t]
+    write("tab_constraints.tex", r"""\begin{table*}[pos=tp]
 \caption{State-constraint satisfaction over randomised set-point changes from
 randomised initial conditions. The LTV-MPC enforces $0\le h_i\le 20$~cm
 explicitly; every distilled policy inherits only the input box, through

@@ -124,7 +124,7 @@ def fig_complexity():
         ax.plot([dep["flops"]], [dep["nmae"]], "*", color="k", ms=11,
                 label=f"deployed ({dep['k']} terms)")
         ax.set_xscale("log")
-        ax.set_xlabel("multiply--accumulate operations per call")
+        ax.set_xlabel("multiply–accumulate operations per call")
         ax.set_ylabel("policy imitation nMAE (% of 12 V)" if reg == "MP" else "")
         ax.set_title(f"{reg} regime", fontsize=8)
         ax.legend(loc="upper right")
@@ -207,7 +207,7 @@ def fig_degradation():
             ys = [abs(r["ss_err_h1_cm"]) for r in sw[n]]
             ax.plot(xs, ys, "o-", ms=3, label=n, **{k: v for k, v in STYLE[n].items() if k != "ls"},
                     ls=STYLE[n]["ls"])
-        ax.set_xlabel("pump-gain degradation (\\%)")
+        ax.set_xlabel("pump-gain degradation (%)")
         ax.set_ylabel(r"$|h_1 - h_1^{\rm ref}|$ at steady state (cm)" if reg == "MP" else "")
         ax.set_title(f"{reg} regime", fontsize=8)
         ax.legend(loc="upper left")
@@ -252,7 +252,7 @@ def fig_roa():
         ax.set_xlabel(r"$h_1(0)$ (cm)")
         ax.set_ylabel(r"$h_2(0)$ (cm)" if reg == "MP" else "")
         ax.set_title(f"{reg}: converged fraction "
-                     f"{roa['converged_fraction']*100:.0f}\\%", fontsize=8)
+                     f"{roa['converged_fraction']*100:.0f}%", fontsize=8)
         ax.grid(False)
     save(fig, "Fig_ROA.pdf")
 
@@ -271,15 +271,15 @@ def fig_signflip():
     Fa = np.hstack([F, np.ones((len(F), 1))])
     sv2 = np.linalg.svd(Fa - Fa.mean(0), compute_uv=False)
     ax[0].semilogy(range(1, len(sv2) + 1), sv2 / sv2.max(), "s--", color="tab:blue",
-                   label="revised design (rank 9/9)")
+                   label="excited design (rank 9/9)")
     ax[0].set_xlabel("index")
     ax[0].set_ylabel("normalised singular value")
     ax[0].set_ylim(1e-18, 3)
     ax[0].legend(loc="lower left")
 
     j = a["constrained_refit_on_revised_dataset"]["jitter_seed_sensitivity"]
-    names = {"ORIGINAL-single-trajectory": "single trajectory", "MP": "revised (MP)",
-             "NMP": "revised (NMP)"}
+    names = {"ORIGINAL-single-trajectory": "single trajectory", "MP": "excited (MP)",
+             "NMP": "excited (NMP)"}
     xs, med, lo, hi, frac = [], [], [], [], []
     for i, (k, lab) in enumerate(names.items()):
         p = j[k]["pump2"]
@@ -295,9 +295,15 @@ def fig_signflip():
     ax[1].set_xticks(xi)
     ax[1].set_xticklabels(xs, fontsize=6)
     ax[1].set_ylabel(r"fitted coefficient on $e_2$")
+    # one row of labels above the panel: anchored to the axes, so they can collide
+    # with neither the error bars nor the tick labels whatever the data do
     for i, f in enumerate(frac):
-        ax[1].annotate(f"wrong sign\n{f*100:.0f}\\% of seeds", (xi[i], med[i]),
-                       textcoords="offset points", xytext=(0, 12), ha="center", fontsize=5)
+        ax[1].annotate(f"wrong sign, {f*100:.0f}% of seeds", (xi[i], 1.0),
+                       xycoords=("data", "axes fraction"),
+                       textcoords="offset points", xytext=(0, 4),
+                       ha="center", va="bottom", fontsize=5)
+    # the right panel's ylabel collides with the left panel's spine at the default spacing
+    fig.subplots_adjust(wspace=0.30)
     save(fig, "Fig_SignFlip.pdf")
 
 
