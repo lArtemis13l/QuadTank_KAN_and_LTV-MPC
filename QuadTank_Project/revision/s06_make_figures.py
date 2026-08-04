@@ -273,7 +273,7 @@ def fig_signflip():
     ax[0].semilogy(range(1, len(sv2) + 1), sv2 / sv2.max(), "s--", color="tab:blue",
                    label="excited design (rank 9/9)")
     ax[0].set_xlabel("index")
-    ax[0].set_ylabel("normalised singular value")
+    ax[0].set_ylabel("normalized singular value")
     ax[0].set_ylim(1e-18, 3)
     ax[0].legend(loc="lower left")
 

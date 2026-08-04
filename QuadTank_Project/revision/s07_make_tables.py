@@ -86,16 +86,19 @@ def t_dataset():
     write("tab_dataset.tex", r"""\begin{table*}[pos=tp]
 \caption{Design of the policy-distillation datasets. The regressor is the 8-dimensional
 policy input augmented with a bias column; its numerical rank determines whether the
-individual coefficients of a linear symbolic read-out are identifiable at all. A
-single regulation trajectory towards a fixed reference is shown for contrast: it is
-the cheapest design to collect and the one on which the read-out is not identifiable.}
+individual coefficients of a linear symbolic read-out are identifiable at all.
+$c(e_1,e_2)$ is the Pearson correlation between the two error features and
+$\kappa(\Phi)$ the condition number of the regressor $\Phi$; both measure how far
+the design is from degeneracy. A single regulation trajectory towards a fixed
+reference is shown for contrast: it is the cheapest design to collect and the one
+on which the read-out is not identifiable.}
 \centering
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{lrrrrrrrrrr}
 \hline
 \textbf{Dataset} & \textbf{Total} & \textbf{Train} & \textbf{Val.} & \textbf{Test} &
 \textbf{On-policy} & \textbf{Off-policy} & \textbf{Groups} &
-$\rho(e_1,e_2)$ & $\kappa(\Phi)$ & \textbf{rank} \\
+$c(e_1,e_2)$ & $\kappa(\Phi)$ & \textbf{rank} \\
 \hline
 """ + orig_row + "\n" + "\n".join(rows) + r"""
 \hline
@@ -274,11 +277,13 @@ def t_stability():
 \caption{What is actually verified about the deployed law. $\rho$ is the spectral
 radius of the closed-loop Jacobian at the fixed point, evaluated at six
 reachable set-points; $\rho<1$ certifies local exponential stability
-(Lyapunov's indirect method). The remaining columns are numerical evidence, not
-proofs: the fraction of a $19\times19$ grid of initial conditions that
-converges, the fraction of $2\times10^4$ box samples violating the decrease
-condition of the local Lyapunov function, and a 200-sample Monte-Carlo campaign
-with $\pm20\%$ perturbation of valve ratios and pump gains.}
+(Lyapunov's indirect method), and $\tau=-\Delta t/\ln\rho$ is the corresponding
+slowest closed-loop decay time constant. The remaining columns are numerical evidence,
+not proofs: ROA is the fraction of a $19\times19$ grid of initial conditions that
+converges; $V$ viol.\ is the fraction of $2\times10^4$ box samples violating the
+decrease condition of the local Lyapunov function; MC stable and p95 $|e|$ are the
+stable fraction and the $95$th-percentile steady-state error over a 200-sample
+Monte-Carlo (MC) campaign with $\pm20\%$ perturbation of valve ratios and pump gains.}
 \centering
 \resizebox{\columnwidth}{!}{%
 \begin{tabular}{lrrrrrrrr}
@@ -313,8 +318,8 @@ def t_constraints():
             f"{rd(100*b['overflow_fraction'],1)} & {rd(100*b['dryout_fraction'],1)} & "
             f"{rd(b['max_level_observed_cm'])} \\\\")
     write("tab_constraints.tex", r"""\begin{table*}[pos=tp]
-\caption{State-constraint satisfaction over randomised set-point changes from
-randomised initial conditions. The LTV-MPC enforces $0\le h_i\le 20$~cm
+\caption{State-constraint satisfaction over randomized set-point changes from
+randomized initial conditions. The LTV-MPC enforces $0\le h_i\le 20$~cm
 explicitly; every distilled policy inherits only the input box, through
 clipping. Percentages are the fraction of tasks in which some tank overflowed
 ($h>20$~cm) or ran dry ($h\le 0$~cm).}
