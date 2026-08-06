@@ -86,6 +86,34 @@ withdrawn.**
 
 ---
 
+## Changes after submission
+
+The manuscript was submitted on 5 August 2026. The tag
+[`submitted-jpc-2026-08-05`](https://github.com/cl0sure6/QuadTank_KAN_and_LTV-MPC/tree/submitted-jpc-2026-08-05)
+marks the repository state at that moment.
+
+That tag is provenance, not a reproduction target: at that commit the pipeline did
+**not** produce every number in the submitted PDF. Auditing the manuscript's numeric
+claims against the result files afterwards turned up one gap and three errors, all
+corrected on `master`:
+
+* **Added `s00_horizon_study.py`.** The prediction-horizon study behind Section 4.1 and
+  the total-variation comparison in Section 6.2 were not produced by any script. They
+  now are, along with the transmission zeros.
+* **Corrected the 3-second-horizon total variation** to 439–714 V, the value the stage
+  reproduces on the two tasks that section compares. The submitted PDF says 439–818 V.
+* **Corrected two transmission zeros**, which had been rounded up: −0.0193 (MP) and
+  +0.0145 (NMP), not −0.0194 and +0.0146. They are computed here, not taken from the
+  benchmark's source, and the manuscript now says so.
+* **Fixed the deployed term count** in Figure 3 and Table 3, which read "24 terms" and
+  labelled a two-regime row with one regime's budget. It is 4 terms/pump (MP) and 48
+  (NMP).
+
+None of these changes a conclusion. They are recorded here so that anyone comparing the
+released code against the submitted PDF can see precisely what differs and why.
+
+---
+
 ## Reproducing
 
 ```bash
