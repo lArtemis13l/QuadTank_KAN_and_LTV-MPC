@@ -1,6 +1,6 @@
 # Certifiable approximation of model predictive control laws
 
-**Author:** Adilkhan Salkimbayev — **Licence:** Apache-2.0
+**Author:** Adilkhan Salkimbayev — **Licence:** Apache-2.0 — **Status:** manuscript under review
 
 Code and data for a study of what can and cannot be certified about an offline
 approximation of a linear time-varying MPC law, on the Johansson quadruple-tank
@@ -28,25 +28,31 @@ with a gate `w(e) = min(||e||^2 / s^2, 1)` that vanishes quadratically at the se
 | An unconstrained read-out **violates negative feedback** on up to 30 % of the operating box | Driven to 0 % (MP) / 0.4 % (NMP) by an affine inequality inside a convex least-squares fit, for ≤ 0.2 pp of accuracy — and in NMP the constraint *improves* accuracy |
 | The gate makes **zero steady-state offset and local stability structural** | Substituting random coefficients (σ up to 100) leaves the closed-loop spectral radius unchanged to ~1e-10 |
 | KAN support selection is **not measurably better** than direct sparse regression | Across 11 term budgets × 2 regimes the two curves sit within a few tenths of a percentage point of each other; neither dominates |
-| The benchmark **cannot justify distillation** | With a correct horizon the MPC beats a well-tuned gain-scheduled LQR by only 7–9 %, so there is little for any approximator to lose |
+| The benchmark **cannot justify distillation** | With a horizon that spans the inverse response the MPC beats a well-tuned gain-scheduled LQR by only 7–9 %, so there is little for any approximator to lose |
 
 Deployed law: **4 terms/pump (MP, 30 multiply–accumulates)** and **48 terms/pump
 (NMP, 203)**, certified locally exponentially stable (ρ ≤ 0.9988) at every set-point
 tested, 97–100 % stable under ±20 % parameter perturbation.
 
-### Two defects in the earlier version of this work, reported rather than quietly fixed
+### Two benchmark properties the design turns on
 
-* **The commanded target was not an equilibrium.** With two pumps the equilibrium set is
+Both are established by `s00_horizon_study.py` and Section 3 of the manuscript before any
+distillation result is reported, because either one, got wrong, prevents the closed loop
+from converging at all — and no approximation of a teacher that does not converge means
+anything.
+
+* **Not every commanded target is an equilibrium.** With two pumps the equilibrium set is
   two-dimensional: fixing `(h1, h2)` determines `h3, h4`. In the NMP regime the
-  equilibrium at (10, 10) is `[10, 10, 4.16, 3.44]` cm, so `[10, 10, 2, 2]` is
-  unreachable and *no* controller — the MPC included — could drive its cost to zero.
-* **The prediction horizon was ~20x shorter than the inverse response.** The
-  right-half-plane zero has a 69 s time constant; the original MPC used N = 30 at
-  Δt_p = 0.1 s — a **3-second** horizon. A myopic controller on a non-minimum-phase
-  plant moves in the wrong direction. The revision uses Δt_p = 4 s, with the control
-  loop still at 0.1 s.
-
-Either alone prevents the closed loop from converging.
+  equilibrium at (10, 10) is `[10, 10, 4.16, 3.44]` cm, so a target such as
+  `[10, 10, 2, 2]` is unreachable and *no* controller — the MPC included — can drive its
+  cost to zero. Every reference used here is an exact solution of the equilibrium
+  equations.
+* **The prediction horizon must span the inverse response.** The right-half-plane zero
+  has a 69 s time constant. At N = 30, a prediction step of Δt_p = 0.1 s gives a
+  **3-second** horizon, and a myopic controller on a non-minimum-phase plant moves in the
+  wrong direction: the loop drifts away from a reachable equilibrium and command activity
+  rises to 439–714 V of total variation. Δt_p = 4 s spans 120 s and fixes both, with the
+  control loop still running at 0.1 s.
 
 ---
 
@@ -55,28 +61,27 @@ Either alone prevents the closed loop from converging.
 | Path | Status |
 |---|---|
 | `QuadTank_Project/revision/` | **Current.** The pipeline behind the manuscript — see its [README](QuadTank_Project/revision/README.md). |
-| `QuadTank_Project/quad_tank_golden_reference_P_minus.csv` | **Current dependency.** The original single-trajectory dataset whose rank deficiency the sign-flip analysis diagnoses; `s03` reads it. |
+| `QuadTank_Project/quad_tank_golden_reference_P_minus.csv` | **Current dependency.** A single closed-loop trajectory at a fixed reference, whose rank deficiency the identifiability analysis in `s03` diagnoses. |
 | `QuadTank_Project/*.ipynb`, `Data/`, `Nucleo_MPC_GenFinal/`, other `*.csv` and `*.pdf` | **Superseded.** Retained for provenance only. |
-| `legacy_photos/` | **Legacy.** Photographs of the hardware-in-the-loop bench and IDE from the earlier version. Kept as a record that the work was carried out; no result in the current paper depends on it. |
+| `legacy_photos/` | **Legacy.** Photographs of a hardware-in-the-loop bench and IDE from earlier exploratory work. Kept as a record; no result in the current paper depends on them. |
 
 ### On the superseded material
 
-The notebooks, the generated OSQP C solver and the hardware-in-the-loop logs belong to
-an earlier version of this work. They are kept because the manuscript diagnoses that
-version's defects and a reader may want to reproduce the diagnosis — not because they
-produce any current result. Nothing under `revision/` imports them, with the single
-exception noted in the table above.
+The notebooks, the generated OSQP C solver and the hardware-in-the-loop logs predate the
+current pipeline. They are kept for provenance, not because they produce any current
+result: nothing under `revision/` imports them, with the single exception of the
+single-trajectory CSV noted above.
 
-The STM32 firmware (`QT_HIL_Clean/`) has been deleted outright: with the hardware
-campaign gone from the paper, nothing referenced it. It remains recoverable from the
-git history if ever needed (`git log --all -- QT_HIL_Clean`).
+The STM32 firmware (`QT_HIL_Clean/`) has been deleted outright — nothing referenced it
+once the hardware campaign left the paper. It remains recoverable from the git history
+(`git log --all -- QT_HIL_Clean`).
 
-The hardware campaign has been removed from the paper. Its latency and flash figures
-were measured for a different symbolic law than the one now deployed, and the
-microcontroller was not available for re-measurement, so retaining them would have
-mixed measured numbers with carried-over ones. Computational cost is now reported as an
-exact multiply–accumulate count, which is a property of the control law rather than of
-a processor. **Any speed-up figure appearing in the git history of this file is
+The hardware campaign is not part of the study. Its latency and flash figures were
+measured for a different symbolic law than the one now deployed, and the microcontroller
+was not available for re-measurement, so retaining them would have mixed measured numbers
+with carried-over ones. Computational cost is instead reported as an exact
+multiply–accumulate count, which is a property of the control law rather than of a
+processor. **Any speed-up figure appearing in the git history of this file is
 withdrawn.**
 
 ---
@@ -86,6 +91,7 @@ withdrawn.**
 ```bash
 cd QuadTank_Project/revision
 pip install -r ../../requirements.txt
+python s00_horizon_study.py        # ~2 min   teacher's prediction horizon, transmission zeros
 python s01_generate_dataset.py     # ~7 min   datasets, both regimes
 python s02_train_models.py         # ~20 min  KAN, MLP, DeepONet, polynomial baselines
 python s02b_sparsify.py            # ~10 min  term-budget sweep, certified selection
@@ -98,7 +104,11 @@ python s07_make_tables.py          # <1 min   LaTeX tables
 python s08_key_numbers.py          # <1 min   every number quoted in the prose
 ```
 
-Results land in `revision/results/`; `key_numbers.json` collects every quantity the
-manuscript states in text.
+Stage 0 runs first because every later stage inherits the horizon it settles; it is the
+only stage that varies `dt_pred` away from the deployed `qtlib.DT_PRED = 4.0 s`.
 
-Questions and issues: open a GitHub issue, or contact **@lArtemis13l**.
+Results land in `revision/results/`. `key_numbers.json` collects every quantity the
+manuscript states in text, and `horizon_study.json` backs the horizon argument and the
+transmission zeros.
+
+Questions and issues: open a GitHub issue, or contact **@cl0sure6**.
