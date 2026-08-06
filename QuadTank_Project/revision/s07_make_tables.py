@@ -144,15 +144,18 @@ def t_openloop():
     if sw:
         d_mp, d_nm = sw["MP"]["deployed"], sw["NMP"]["deployed"]
         rows.append(r"\hline")
-        rows.append(f"\\textbf{{Deployed symbolic law ({d_mp['k']} terms)}} & "
-                    f"{sum(d_mp['n_terms'])} & \\textbf{{{rd(d_mp['nmae'])}}} & -- & "
+        rows.append(f"\\textbf{{Deployed symbolic law ({d_mp['k']}/{d_nm['k']} terms)}} & "
+                    f"{sum(d_mp['n_terms'])}/{sum(d_nm['n_terms'])} & "
+                    f"\\textbf{{{rd(d_mp['nmae'])}}} & -- & "
                     f"\\textbf{{{rd(d_nm['nmae'])}}} & -- \\\\")
     write("tab_openloop.tex", r"""\begin{table*}[pos=tp]
 \caption{Open-loop imitation of the LTV-MPC policy on the held-out test split.
 nMAE is the mean absolute command error as a percentage of the full actuator
 range ($U_{\max}-U_{\min}=12$~V); predictions are clipped to the actuator box
 before scoring, as they are on the target. Every row is trained on the same
-data, the same split and the same feed-forward/feedback decomposition.}
+data, the same split and the same feed-forward/feedback decomposition. The deployed
+law's term budget is selected per regime by the stability certificate, so its row is
+labelled MP/NMP.}
 \centering
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{lrrrrr}

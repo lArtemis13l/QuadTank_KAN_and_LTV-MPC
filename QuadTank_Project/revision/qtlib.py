@@ -200,7 +200,7 @@ R_MPC = np.diag([1e-3, 1e-3])
 HORIZON = 30
 # The prediction model is discretised far more coarsely than the control loop.
 # This matters: the plant's dominant time constants are 50-70 s and the NMP
-# transmission zero sits at 0.0146 rad/s (69 s), so a horizon of N*dt_pred must
+# transmission zero sits at 0.0145 rad/s (69 s), so a horizon of N*dt_pred must
 # span at least that.  The original study used dt_pred = 0.1 s, giving a 3 s
 # horizon -- shorter than the inverse response it was supposed to anticipate,
 # which makes the controller effectively myopic and, on a non-minimum-phase

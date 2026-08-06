@@ -135,8 +135,11 @@ def fig_complexity():
 def fig_error_decomposition():
     m = json.load(open(os.path.join(RES, "openloop_metrics.json")))
     sw = json.load(open(os.path.join(RES, "sparsity_sweep.json")))
+    # the deployed budget differs by regime (MP/NMP), so read both rather than
+    # hard-coding a single count into a chart that shows both
+    k_mp, k_nmp = sw["MP"]["deployed"]["k"], sw["NMP"]["deployed"]["k"]
     labels = ["spline KAN", "auto-symbolic\n(raw)", "+ coefficient\nrefit",
-              "+ shape\nconstraint", "deployed\n(24 terms)"]
+              "+ shape\nconstraint", f"deployed\n({k_mp}/{k_nmp} terms)"]
     fig, ax = plt.subplots(figsize=(3.5, 2.3))
     w = 0.38
     for i, reg in enumerate(("MP", "NMP")):

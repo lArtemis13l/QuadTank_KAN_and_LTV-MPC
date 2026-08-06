@@ -6,6 +6,7 @@ in this directory. Run them in order from here; each writes into `data/`, `model
 (`../../../els-cas-templates/figs` and `.../tables`).
 
 ```bash
+python s00_horizon_study.py        # ~2 min   settles the teacher's prediction horizon
 python s01_generate_dataset.py     # ~7 min   distillation datasets, both regimes
 python s02_train_models.py         # ~20 min  KAN, MLP, DeepONet, polynomial baselines
 python s02b_sparsify.py            # ~10 min  term-budget sweep + certified selection
@@ -20,6 +21,10 @@ python s08_key_numbers.py          # <1 min   every number quoted in the prose
 
 `results/key_numbers.json` is the one file to look at if you want to check the
 manuscript's claims against the code: it collects each quantity the text states.
+Stage 0 runs first because everything downstream inherits the horizon it settles; its
+`results/horizon_study.json` backs the horizon argument in Section 4.1 and the
+total-variation comparison in Section 6.2. It is the only stage that varies `dt_pred`
+away from the deployed `qtlib.DT_PRED = 4.0 s`.
 
 ## Modules
 
